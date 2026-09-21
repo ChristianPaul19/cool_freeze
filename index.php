@@ -6,12 +6,12 @@ if (MAINTENANCE_MODE && APP_ENV !== 'local') {
     http_response_code(503);
     header('Retry-After: 3600');
 
-    require FRONTEND_PATH . '/pages/maintenance.php';
+    // require FRONTEND_PATH . '/pages/maintenance.php';
     exit;
 }
 
 $pages = [
-    'home'     => 'homepage.php',
+    'home' => 'home.php',
 ];
 
 $page = $_GET['page'] ?? 'home';
@@ -23,7 +23,7 @@ if (
 ) {
     http_response_code(404);
 
-    require FRONTEND_PATH . '/pages/404.php';
+    // require FRONTEND_PATH . '/pages/404.php';
     exit;
 }
 
