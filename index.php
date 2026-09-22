@@ -12,9 +12,13 @@ if (MAINTENANCE_MODE && APP_ENV !== 'local') {
 
 $pages = [
     'home' => 'home.php',
+    'landing' => 'landing.php',
+    'login' => 'auth/login.php',
+    'register' => 'auth/register.php',
 ];
 
-$page = $_GET['page'] ?? 'home';
+//                        change this 'register'. pick the page in the $pages
+$page = $_GET['page'] ?? 'register';
 
 if (
     !is_string($page) ||

@@ -1,6 +1,6 @@
 # CoolFreeze
 
-## How to clone the project (using cli)
+## How to clone this project (using cli)
 
 1. Go to htdocs by typing this in cli: `cd C:/xampp/htdocs`
 2. copy and paste this in the cli: `git clone https://github.com/MarkBorito/Cool_Freeze.git`
