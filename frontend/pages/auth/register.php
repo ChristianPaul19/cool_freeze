@@ -37,115 +37,100 @@
         </div>
 
 
-          <!-- RIGHT SIDE -->
-          <div class="col-md-6 p-5">
+        <!-- RIGHT SIDE -->
+        <div class="col-md-6 p-5">
+          <div class="d-flex justify-content-between align-center mb-4">
+            <span class=""><a href="<?= BASE_URL ?>?page=home" class="text-decoration-none">←</a></span>
+            <small class="text-secondary">
+                Already have an account?
+                <a href="<?= BASE_URL ?>?page=login">Login</a>
+            </small>
+          </div>
 
-              <div class="d-flex justify-content-between align-center mb-4">
+          <h2 class="fw-bold">
+              Create Your Account
+          </h2>
 
-                  <span class=""><a href="<?= BASE_URL ?>?page=home" class="text-decoration-none">←</a></span>
-
-                  <small class="text-secondary">
-                      Already have an account?
-                      <a href="<?= BASE_URL ?>?page=login">Login</a>
-                  </small>
-
-              </div>
-
-              <h2 class="fw-bold">
-                  Create Your Account
-              </h2>
-
-              <p class="text-secondary small">
-                  Join CoolFreeze and get access to our products and services
-              </p>
+          <p class="text-secondary small">
+              Join CoolFreeze and get access to our products and services
+          </p>
 
 
-              <form>
+          <form>
+            <label class="form-label fw-bold small">
+                Username
+            </label>
 
-                  <label class="form-label fw-bold small">
-                      Username
-                  </label>
+            <input
+                type="text"
+                class="form-control bg-light border-0 mb-3"
+                placeholder="Enter your user name"
+            >
 
-                  <input
-                      type="text"
-                      class="form-control bg-light border-0 mb-3"
-                      placeholder="Enter your user name"
-                  >
+            <label class="form-label fw-bold small">
+                Email Address
+            </label>
 
+            <input
+                type="email"
+                class="form-control bg-light border-0 mb-3"
+                placeholder="Enter your email address"
+            >
 
-                  <label class="form-label fw-bold small">
-                      Email Address
-                  </label>
+            <label class="form-label fw-bold small">
+                Phone Number
+            </label>
 
-                  <input
-                      type="email"
-                      class="form-control bg-light border-0 mb-3"
-                      placeholder="Enter your email address"
-                  >
+            <input
+                type="text"
+                class="form-control bg-light border-0 mb-3"
+                placeholder="Enter your phone number"
+            >
 
+            <label class="form-label fw-bold small">
+                Password
+            </label>
 
-                  <label class="form-label fw-bold small">
-                      Phone Number
-                  </label>
+            <input
+                type="password"
+                class="form-control bg-light border-0 mb-3"
+                placeholder="Enter your password"
+            >
 
-                  <input
-                      type="text"
-                      class="form-control bg-light border-0 mb-3"
-                      placeholder="Enter your phone number"
-                  >
+            <label class="form-label fw-bold small">
+                Confirm Password
+            </label>
 
+            <input
+                type="password"
+                class="form-control bg-light border-0 mb-3"
+                placeholder="Enter your password"
+            >
 
-                  <label class="form-label fw-bold small">
-                      Password
-                  </label>
+            <div class="form-check small mb-3">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="terms"
+                >
 
-                  <input
-                      type="password"
-                      class="form-control bg-light border-0 mb-3"
-                      placeholder="Enter your password"
-                  >
+                <label class="form-check-label" for="terms">
+                    I agree to the
+                    <a href="#">Terms of Service</a>
+                    and
+                    <a href="#">Privacy Policy</a>
+                </label>
+            </div>
 
-
-                  <label class="form-label fw-bold small">
-                      Confirm Password
-                  </label>
-
-                  <input
-                      type="password"
-                      class="form-control bg-light border-0 mb-3"
-                      placeholder="Enter your password"
-                  >
-
-
-                  <div class="form-check small mb-3">
-
-                      <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="terms"
-                      >
-
-                      <label class="form-check-label" for="terms">
-                          I agree to the
-                          <a href="#">Terms of Service</a>
-                          and
-                          <a href="#">Privacy Policy</a>
-                      </label>
-
-                  </div>
-
-
-                  <button class="btn btn-primary w-100">
-                      Register
-                  </button>
-
-              </form>
-
+            <button class="btn btn-primary w-100">
+                Register
+            </button>
+          </form>
         </div>
+
       </div>
+      
     </div>
     
-    
   </body>
-
 </html>
