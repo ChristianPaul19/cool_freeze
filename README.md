@@ -7,6 +7,8 @@
 3. Go to the coolfreeze project: `cd cd cool_freeze`
 4. Type this: `code .`
 
+---
+
 ## Basic Git Commands
 
 1. `git status` - See which files have been changed
@@ -20,6 +22,17 @@
 6. `git branch` - View branches
 7. `git switch -c <branch_name>` - Create and switch to a new branch
 8. `git switch <branch_name>` switching branch
+
+---
+
+## how to use database/ folder
+
+1. Open xampp app then run apache and mysql
+2. open the xampp shell
+3. Go to the coolfreeze project, copy and paste this: `cd htdocs\coolfreeze`
+4. To use the query of schema.sql and insert_sample.sql in xampp
+5. Copy and paste this in xampp shell: `mysql -u root < database\schema.sql` after that,
+6. `mysql -u root < database\insert_sample.sql`
 
 ### includes/
 
