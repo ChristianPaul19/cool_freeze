@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/backend/bootstrap.php';
+require_once __DIR__ . '/backend/bootstrap.php';    
 
 // Maintenance mode (local XAMPP stays viewable)
 if (MAINTENANCE_MODE && APP_ENV !== 'local') {
