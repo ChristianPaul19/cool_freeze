@@ -7,7 +7,7 @@ define('APP_ENV', preg_match('/^(localhost|127\.0\.0\.1)(:\d+)?$/', $host) ? 'lo
 
 define('BASE_URL', APP_ENV === 'local' ? '/coolfreeze/' : '/');
 
-define('MAINTENANCE_MODE', false);
+define('MAINTENANCE_MODE', true);
 
 date_default_timezone_set('Asia/Manila');
 

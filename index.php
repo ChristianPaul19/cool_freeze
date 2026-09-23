@@ -6,7 +6,7 @@ if (MAINTENANCE_MODE && APP_ENV !== 'local') {
     http_response_code(503);
     header('Retry-After: 3600');
 
-    // require FRONTEND_PATH . '/pages/maintenance.php';
+    //require FRONTEND_PATH . '/pages/error/maintenance.php';
     exit;
 }
 
@@ -15,8 +15,8 @@ $pages = [
     'landing' => 'landing.php',
     'login' => 'auth/login.php',
     'register' => 'auth/register.php',
-    'error404' => 'error/error404',
-    'maintenace' => 'error/maintenance',
+    'error404' => 'error/error404.php',
+    'maintenance' => 'error/maintenance.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages
@@ -29,7 +29,7 @@ if (
 ) {
     http_response_code(404);
 
-    // require FRONTEND_PATH . '/pages/404.php';
+    require FRONTEND_PATH . '/pages/error/error404.php';
     exit;
 }
 
