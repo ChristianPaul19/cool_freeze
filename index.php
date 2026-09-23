@@ -15,6 +15,8 @@ $pages = [
     'landing' => 'landing.php',
     'login' => 'auth/login.php',
     'register' => 'auth/register.php',
+    'error404' => 'error/error404',
+    'maintenace' => 'error/maintenance',
 ];
 
 //                        change this 'register'. pick the page in the $pages
