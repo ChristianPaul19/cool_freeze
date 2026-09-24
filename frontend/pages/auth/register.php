@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Account | CoolFreeze</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <!-- h-dvh + overflow-hidden: the page is exactly one screen tall and never scrolls -->
@@ -14,16 +15,12 @@
 
     <!-- LEFT SIDE (hidden on mobile, shown from md and up) -->
     <div class="relative hidden h-full overflow-hidden md:block md:w-1/2">
-      <!-- Background: fills the panel exactly, cropped to fit -->
       <img
         src="<?= BASE_URL . 'frontend/assets/img/login_register_background.jpg' ?>"
         class="absolute inset-0 h-full w-full object-cover"
         alt=""
       >
 
-      <!-- Text over image -->
-      <!-- Text sits in the top ~40% of the panel, above the aircon in the image.
-           Headline size follows both width and height so it shrinks on short screens. -->
       <div class="absolute left-0 top-0 p-6 lg:p-10">
         <h2 class="text-xl font-bold text-blue-600 lg:text-2xl">COOLFREEZE</h2>
         <h1 class="mt-[3vh] text-[clamp(1.75rem,min(4vw,6vh),3rem)] font-bold leading-tight text-gray-900">
@@ -38,12 +35,10 @@
     </div>
 
 
-    <!-- RIGHT SIDE (only this panel scrolls, and only if a very short screen can't fit the form) -->
+    <!-- RIGHT SIDE -->
     <div class="flex h-full w-full overflow-y-auto px-5 py-4 sm:px-8 md:w-1/2 md:px-10 lg:px-14">
-      <!-- m-auto centers vertically without clipping the top when content overflows -->
       <div class="m-auto w-full max-w-lg">
 
-        <!-- Brand (mobile only, since the left panel is hidden) -->
         <h2 class="mb-2 text-xl font-bold text-blue-600 md:hidden">COOLFREEZE</h2>
 
         <div class="mb-3 flex items-center justify-between gap-3">
@@ -68,7 +63,17 @@
           Join CoolFreeze and get access to our products and services
         </p>
 
-        <form class="mt-4 space-y-3" method="post" action="">
+        <!-- NEW: general success/error message area -->
+        <div id="form-message" class="mt-3 hidden rounded-md p-3 text-sm"></div>
+
+        <!-- CHANGED: added id, real action URL, and novalidate -->
+        <form
+          id="register-form"
+          class="mt-4 space-y-3"
+          method="post"
+          action="<?= BASE_URL . 'backend/api/register.php' ?>"
+          novalidate
+        >
 
           <div>
             <label for="username" class="mb-1 block text-sm font-bold">Username</label>
@@ -81,6 +86,7 @@
               class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your user name"
             >
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="username"></p> <!-- NEW -->
           </div>
 
           <div>
@@ -94,6 +100,7 @@
               class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your email address"
             >
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="email"></p> <!-- NEW -->
           </div>
 
           <div>
@@ -108,6 +115,7 @@
               class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your phone number"
             >
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="phone"></p> <!-- NEW -->
           </div>
 
           <div>
@@ -121,6 +129,7 @@
               class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
             >
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="password"></p> <!-- NEW -->
           </div>
 
           <div>
@@ -134,27 +143,33 @@
               class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Confirm your password"
             >
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="confirm_password"></p> <!-- NEW -->
           </div>
 
-          <div class="flex items-start gap-2 text-sm">
-            <input
-              class="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 accent-blue-600"
-              type="checkbox"
-              id="terms"
-              name="terms"
-              required
-            >
-            <label for="terms">
-              I agree to the
-              <a href="#" class="text-blue-600 hover:underline">Terms of Service</a>
-              and
-              <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
-            </label>
+          <!-- CHANGED: wrapped in a div so the error can sit below the checkbox row -->
+          <div>
+            <div class="flex items-start gap-2 text-sm">
+              <input
+                class="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 accent-blue-600"
+                type="checkbox"
+                id="terms"
+                name="terms"
+                value="1"
+                required
+              >
+              <label for="terms">
+                I agree to the
+                <a href="#" class="text-blue-600 hover:underline">Terms of Service</a>
+                and
+                <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+              </label>
+            </div>
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="terms"></p> <!-- NEW -->
           </div>
 
           <button
             type="submit"
-            class="w-full cursor-pointer rounded-md bg-blue-600 px-4 py-2.5 font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            class="w-full cursor-pointer rounded-md bg-blue-600 px-4 py-2.5 font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
           >
             Register
           </button>
@@ -164,6 +179,65 @@
     </div>
 
   </div>
+
+  <!-- NEW: AJAX submit -->
+  <script>
+  $(function () {
+    const $form = $('#register-form');
+    const $msg  = $('#form-message');
+    const $btn  = $form.find('button[type="submit"]');
+
+    $(window).on('pageshow', function (e) {
+      if (e.originalEvent.persisted) {   // page restored from back/forward cache
+        $form[0].reset();
+        clearErrors();
+        $btn.prop('disabled', false).text('Register');
+      }
+    });
+
+    function showMessage(text, ok) {
+      $msg.removeClass('hidden bg-red-50 text-red-700 bg-green-50 text-green-700')
+          .addClass(ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700')
+          .text(text);
+    }
+
+    function clearErrors() {
+      $msg.addClass('hidden');
+      $('.field-error').addClass('hidden').text('');
+    }
+
+    $form.on('submit', function (e) {
+      e.preventDefault();
+      clearErrors();
+      $btn.prop('disabled', true).text('Creating account...');
+
+      $.ajax({
+        url: $form.attr('action'),
+        method: 'POST',
+        data: $form.serialize(),
+        dataType: 'json'
+      })
+      .done(function (res) {
+        $form[0].reset();                                   // clears all fields
+        showMessage(res.message, true);
+        setTimeout(function () {
+          window.location.replace(res.redirect);            // replace: register page is not left in history
+        }, 1200);
+      })
+      .fail(function (xhr) {
+        const res = xhr.responseJSON || {};
+        if (res.errors) {
+          $.each(res.errors, function (field, text) {
+            $('.field-error[data-for="' + field + '"]').text(text).removeClass('hidden');
+          });
+        } else {
+          showMessage(res.message || 'Network error. Please try again.', false);
+        }
+        $btn.prop('disabled', false).text('Register');
+      });
+    });
+  });
+  </script>
 
 </body>
 </html>

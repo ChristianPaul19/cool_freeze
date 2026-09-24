@@ -10,9 +10,17 @@ $isLocalHost = $host === 'localhost'
 
 define('APP_ENV', $isLocalHost ? 'local' : 'production');
 
-// Detect the folder the project is running from (works for /coolfreeze/, /cool_freeze/, or / on Hostinger)
-$scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-define('BASE_URL', $scriptDir . '/');
+// Detect the project's URL folder (/cool_freeze/, /coolfreeze/, or / on Hostinger),
+// no matter which script is running (index.php, backend/api/register.php, ...).
+// ROOT_PATH is defined in bootstrap.php before this file is loaded.
+$scriptFile = str_replace('\\', '/', realpath($_SERVER['SCRIPT_FILENAME']));
+$rootPath   = str_replace('\\', '/', realpath(ROOT_PATH));
+$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
+
+$relative = substr($scriptFile, strlen($rootPath));                     // e.g. /backend/api/register.php
+$base     = substr($scriptName, 0, strlen($scriptName) - strlen($relative)); // e.g. /cool_freeze
+
+define('BASE_URL', rtrim($base, '/') . '/');
 
 define('MAINTENANCE_MODE', false);
 
