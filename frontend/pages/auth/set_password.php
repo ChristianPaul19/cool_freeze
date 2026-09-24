@@ -151,7 +151,7 @@
     <div class="relative hidden h-full overflow-hidden md:block md:w-1/2">
       <img
         src="<?= BASE_URL . 'frontend/assets/img/login_register_background.jpg' ?>"
-        class="absolute inset-0 h-full w-full object-cover"
+        class="absolute inset-0 h-full w-full object-cover -scale-x-100"
         alt=""
       >
 
