@@ -113,5 +113,19 @@
         </div>
     </section>
 
+    <section id="howwework">
+        <div class="headingtext">
+            <div class="question">
+                <span>-</span>
+                <p>What we offer?</p>
+                <span>-</span>
+            </div>
+            <div class="persuade">
+                <p class="mainpersuade">Complete Air Conditioning Solutions for <span>Your Comfort.</span></p>
+                <p>From cleaning and maintenance to repairs and installation, CoolFreeze provides reliable air conditioning services to keep your home or business cool, comfortable, and running smoothly.</p>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
