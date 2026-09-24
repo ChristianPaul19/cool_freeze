@@ -1,6 +1,6 @@
 <?php
 
-define('APP_NAME', 'CoolFreeze');
+define('APP_NAME', 'Cool Freeze');
 
 $host = $_SERVER['HTTP_HOST'] ?? '';
 $host = preg_replace('/:\d+$/', '', strtolower($host));
@@ -10,9 +10,10 @@ $isLocalHost = $host === 'localhost'
 
 define('APP_ENV', $isLocalHost ? 'local' : 'production');
 
-define('BASE_URL', APP_ENV === 'local' ? '/coolfreeze/' : '/');
+// Detect the folder the project is running from (works for /coolfreeze/, /cool_freeze/, or / on Hostinger)
+$scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+define('BASE_URL', $scriptDir . '/');
 
 define('MAINTENANCE_MODE', false);
 
 date_default_timezone_set('Asia/Manila');
-

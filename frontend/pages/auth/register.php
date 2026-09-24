@@ -16,7 +16,7 @@
         <div class="col-md-6 position-relative p-0 overflow-hidden">
           <!-- Background -->
           <img
-              src="<?php echo BASE_URL . 'frontend/assets/img/login_register_background.jpg'?>"
+              src="<?= BASE_URL . 'frontend/assets/img/login_register_background.jpg' ?>"
               class="w-100 vh-100 fit-cover"
               alt=""
           >
