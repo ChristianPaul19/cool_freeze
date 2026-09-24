@@ -15,12 +15,16 @@ $pages = [
     'landing' => 'landing.php',
     'login' => 'auth/login.php',
     'register' => 'auth/register.php',
+    'forget' => 'auth/forget.php',
+    'verification' => 'auth/verification.php',
+    'reset' => 'auth/reset.php',
+    'set_password' => 'auth/set_password.php',
     'error404' => 'error/error404.php',
     'maintenance' => 'error/maintenance.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages
-$page = $_GET['page'] ?? 'register';
+$page = $_GET['page'] ?? 'forget';
 
 if (
     !is_string($page) ||

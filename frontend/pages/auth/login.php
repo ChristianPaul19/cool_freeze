@@ -81,7 +81,7 @@
               <label for="remember">Remember me</label>
             </div>
 
-            <a href="#" class="text-blue-600 hover:underline">Forgot password?</a>
+            <a href="<?= BASE_URL ?>?page=forget" class="text-blue-600 hover:underline">Forgot password?</a>
           </div>
 
           <button
@@ -101,13 +101,13 @@
       <!-- Background: fills the panel exactly, cropped to fit -->
       <img
         src="<?= BASE_URL . 'frontend/assets/img/login_register_background.jpg' ?>"
-        class="absolute inset-0 h-full w-full object-cover"
+        class="absolute inset-0 h-full w-full object-cover -scale-x-100"
         alt=""
       >
 
       <!-- Text sits in the top ~40% of the panel, above the aircon in the image.
            Headline size follows both width and height so it shrinks on short screens. -->
-      <div class="absolute left-0 top-0 p-6 lg:p-10">
+      <div class="absolute right-0 top-0 flex flex-col items-end p-6 text-right p-6 lg:p-10">
         <h2 class="text-xl font-bold text-blue-600 lg:text-2xl">COOLFREEZE</h2>
         <h1 class="mt-[3vh] text-[clamp(1.75rem,min(4vw,6vh),3rem)] font-bold leading-tight text-gray-900">
           Stay Cool,<br>
