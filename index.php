@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/backend/bootstrap.php';
+require_once __DIR__ . '/backend/bootstrap.php';    
 
 // Maintenance mode (local XAMPP stays viewable)
 if (MAINTENANCE_MODE && APP_ENV !== 'local') {
@@ -15,6 +15,10 @@ $pages = [
     'landing' => 'landing.php',
     'login' => 'auth/login.php',
     'register' => 'auth/register.php',
+    'forget' => 'auth/forget.php',
+    'verification' => 'auth/verification.php',
+    'reset' => 'auth/reset.php',
+    'set_password' => 'auth/set_password.php',
     'error404' => 'error/error404.php',
     'maintenance' => 'error/maintenance.php',
 ];

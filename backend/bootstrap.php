@@ -2,7 +2,7 @@
 
 define('BACKEND_PATH', __DIR__);
 define('ROOT_PATH', dirname(__DIR__));
-define('FRONTEND_PATH', ROOT_PATH . '/frontend');
+define('FRONTEND_PATH', ROOT_PATH . '/frontend/');
 
 require_once BACKEND_PATH . '/config/app.php';
 
@@ -26,6 +26,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 # Helper
-#
 
-// require_once BACKEND_PATH . '/config/database.php';
+
+require_once BACKEND_PATH . '/config/database.php';

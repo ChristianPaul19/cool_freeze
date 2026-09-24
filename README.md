@@ -3,8 +3,8 @@
 ## How to clone this project (using cli)
 
 1. Go to htdocs by typing this in cli: `cd C:/xampp/htdocs`
-2. copy and paste this in the cli: `git clone https://github.com/MarkBorito/Cool_Freeze.git`
-3. Go to the coolfreeze project: `cd cd cool_freeze`
+2. copy and paste this in the cli: `git clone https://github.com/MarkBorito/cool_freeze.git`
+3. Go to the coolfreeze project: `cd cool_freeze`
 4. Type this: `code .`
 
 ---
