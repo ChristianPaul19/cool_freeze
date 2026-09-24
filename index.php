@@ -24,7 +24,7 @@ $pages = [
 ];
 
 //                        change this 'register'. pick the page in the $pages
-$page = $_GET['page'] ?? 'forget';
+$page = $_GET['page'] ?? 'register';
 
 if (
     !is_string($page) ||
