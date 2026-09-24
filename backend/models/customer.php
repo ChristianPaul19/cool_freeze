@@ -28,3 +28,15 @@ function customer_create(mysqli $conn, string $username, string $email, string $
     $stmt->close();
     return $id;
 }
+
+function customer_find_by_email(mysqli $conn, string $email): ?array {
+    $stmt = $conn->prepare(
+        'SELECT customer_id, username, email, password_hash
+         FROM customers WHERE email = ? LIMIT 1'
+    );
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $row = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $row ?: null;
+}
