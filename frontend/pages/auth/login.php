@@ -13,6 +13,8 @@ if (!empty($_SESSION['customer_id'])) {
   <title>Login Account | CoolFreeze</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <script src="<?= BASE_URL . 'frontend/assets/js/eye-password.js' ?>"></script>
 </head>
 
 <body class="h-dvh overflow-hidden bg-white text-gray-900 antialiased">
@@ -26,7 +28,7 @@ if (!empty($_SESSION['customer_id'])) {
         <h2 class="mb-2 text-xl font-bold text-blue-600 md:hidden">COOLFREEZE</h2>
 
         <div class="mb-3 flex items-center justify-between gap-3">
-          <a href="<?= BASE_URL ?>?page=home" class="inline-flex" aria-label="Back to home">
+          <a href="<?= BASE_URL ?>?page=landing" class="inline-flex" aria-label="Back to landing">
             <img class="h-6 w-6" src="<?= BASE_URL . 'frontend/assets/img/back-arrow.svg' ?>" alt="Back">
           </a>
           <small class="text-sm text-gray-500">
@@ -69,15 +71,19 @@ if (!empty($_SESSION['customer_id'])) {
 
           <div>
             <label for="password" class="mb-1 block text-sm font-bold">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              autocomplete="current-password"
-              required
-              class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
-            >
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                required
+                class="w-full rounded-md bg-gray-100 px-3 py-2 pr-10 text-base outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your password"
+              >
+              <i class="bi bi-eye toggle-password absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+                data-target="password"></i>
+            </div>
             <p class="field-error mt-1 hidden text-xs text-red-600" data-for="password"></p>
           </div>
 
