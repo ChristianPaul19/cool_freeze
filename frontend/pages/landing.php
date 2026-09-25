@@ -12,7 +12,7 @@
     <div class="navmenu">
         <ul>
             <li class="logo"><img src="frontend/assets/img/CoolFreeze_Logo.svg" alt="profiles"></li>
-            <li class="primarybtn"><a href="<?= BASE_URL ?>?page=login" >Register</a><img src="frontend/assets/img/right.svg" alt="profiles"></li>
+            <a href="<?= BASE_URL ?>?page=login" ><li class="primarybtn">Register<img src="frontend/assets/img/right.svg" alt="profiles"></li></a>
         </ul>
     </div>
 
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="btncontainer">
-                    <div class="primarybtn"><a href="<?= BASE_URL ?>?page=login">Book a Service</a><img src="frontend/assets/img/right.svg" alt="profiles"></div>
+                    <a href="<?= BASE_URL ?>?page=login"><div class="primarybtn">Book a Service<img src="frontend/assets/img/right.svg" alt="profiles"></div></a>
                     <a href="#whychooseus"><div class="secondarybtn">Explore<img src="frontend/assets/img/down.svg" alt="profiles"></div></a>
                 </div>
             </div>
@@ -321,7 +321,7 @@
                 </div>
                 <p class="mainpersuade">Get Started with CoolFreeze Today</p>
                 <p class="getstarted__subtext">Book a service in just a few minutes and let our team take care of the rest.</p>
-                <div class="primarybtn"><a href="<?= BASE_URL ?>?page=login">Book a Service</a><img src="frontend/assets/img/right.svg" alt="profiles"></div>
+                <a href="<?= BASE_URL ?>?page=login"><div class="primarybtn">Book a Service<img src="frontend/assets/img/right.svg" alt="profiles"></div></a>
             </div>
             <div class="getstarted__icons" aria-hidden="true">
                 <span class="getstarted__icon getstarted__icon--1"><i class="bi bi-send"></i></span>
