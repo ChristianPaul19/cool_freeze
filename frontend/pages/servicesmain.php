@@ -9,7 +9,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
 
   <link rel="stylesheet" href="/cool_freeze/frontend/assets/css/servicesmain.css">
 </head>
@@ -110,7 +111,7 @@
 
         <!-- AC Cleaning -->
         <article class="card">
-          <img src="/cool_freeze/frontend/assets/img/sample_coolfreeze_technician.jpg" alt="Bright living room with a grey sofa" class="card-img">
+          <img src="/cool_freeze/frontend/assets/img/couch.svg" alt="Bright living room with a grey sofa" class="card-img">
           <div class="card-body">
             <h2>AC Cleaning</h2>
             <p class="desc">Keep your aircon clean and efficient with our professional cleaning service</p>
@@ -133,7 +134,7 @@
 
         <!-- AC Repair -->
         <article class="card">
-          <img src="/cool_freeze/frontend/assets/img/sample_coolfreeze_technician.jpg" alt="Bright living room with a grey sofa" class="card-img">
+          <img src="/cool_freeze/frontend/assets/img/couch.svg" alt="Bright living room with a grey sofa" class="card-img">
           <div class="card-body">
             <h2>AC Repair</h2>
             <p class="desc">We fix aircon problems quickly and efficiently to get your unit back in condition</p>
@@ -156,7 +157,7 @@
 
         <!-- AC Maintenance -->
         <article class="card">
-          <img src="/cool_freeze/frontend/assets/img/sample_coolfreeze_technician.jpg" alt="Bright living room with a grey sofa" class="card-img">
+          <img src="/cool_freeze/frontend/assets/img/couch.svg" alt="Bright living room with a grey sofa" class="card-img">
           <div class="card-body">
             <h2>AC Maintenance</h2>
             <p class="desc">Prevent problems before they happen with our scheduled maintenance service</p>
@@ -179,7 +180,7 @@
 
         <!-- AC Installation -->
         <article class="card card-wide">
-          <img src="/cool_freeze/frontend/assets/img/sample_coolfreeze_technician.jpg" alt="Bright living room with a grey sofa" class="card-img">
+          <img src="/cool_freeze/frontend/assets/img/couch.svg" alt="Bright living room with a grey sofa" class="card-img">
           <div class="card-body">
             <h2>AC Installation</h2>
             <p class="desc">Professional installation for your new aircon unit</p>
@@ -202,7 +203,7 @@
 
         <!-- Parts replacement -->
         <article class="card card-wide">
-          <img src="/cool_freeze/frontend/assets/img/sample_coolfreeze_technician.jpg" alt="Bright living room with a grey sofa" class="card-img">
+          <img src="/cool_freeze/frontend/assets/img/couch.svg" alt="Bright living room with a grey sofa" class="card-img">
           <div class="card-body">
             <h2>Parts replacement</h2>
             <p class="desc">Replace damaged parts with genuine and high-quality components</p>
@@ -296,7 +297,7 @@
 
             <div class="info-col">
               <div class="info-art">
-                <i class="bi bi-snow2"></i>
+                <img class="modalpic" src="/cool_freeze/frontend/assets/img/aircon.svg" alt="">
               </div>
               <div class="includes-box">
                 <p class="includes-title" id="includesTitle">Service Includes:</p>
