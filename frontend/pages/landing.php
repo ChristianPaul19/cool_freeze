@@ -12,7 +12,7 @@
     <div class="navmenu">
         <ul>
             <li class="logo"><img src="frontend/assets/img/CoolFreeze_Logo.svg" alt="profiles"></li>
-            <li class="primarybtn"><a href="login.php">Register</a><img src="frontend/assets/img/right.svg" alt="profiles"></li>
+            <li class="primarybtn"><a href="<?= BASE_URL ?>?page=login" >Register</a><img src="frontend/assets/img/right.svg" alt="profiles"></li>
         </ul>
     </div>
 
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="btncontainer">
-                    <div class="primarybtn"><a href="login.php">Book a Service</a><img src="frontend/assets/img/right.svg" alt="profiles"></div>
+                    <div class="primarybtn"><a href="<?= BASE_URL ?>?page=login">Book a Service</a><img src="frontend/assets/img/right.svg" alt="profiles"></div>
                     <a href="#whychooseus"><div class="secondarybtn">Explore<img src="frontend/assets/img/down.svg" alt="profiles"></div></a>
                 </div>
             </div>
@@ -159,7 +159,8 @@
                 <div class="service-card__body">
                     <h3>AC<br>Installation</h3>
                     <p>Expert installation of new air conditioning units for efficient and reliable cooling.</p>
-                    <a href="#" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
+                    <!-- Kailangan palitan: loggedin->homepage & new->loginPage  -->
+                    <a href="<?= BASE_URL ?>?page=login" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
                 </div>
             </article>
 
@@ -168,7 +169,8 @@
                 <div class="service-card__body">
                     <h3>AC<br>Repair</h3>
                     <p>Fast and reliable repairs to restore your AC’s cooling performance and comfort.</p>
-                    <a href="#" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
+                    <!-- Kailangan palitan: loggedin->homepage & new->loginPage  -->
+                    <a href="<?= BASE_URL ?>?page=login" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
                 </div>
             </article>
 
@@ -177,7 +179,8 @@
                 <div class="service-card__body">
                     <h3>AC<br>Cleaning</h3>
                     <p>Thorough AC cleaning to improve airflow, cooling efficiency, and indoor air quality.</p>
-                    <a href="#" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
+                    <!-- Kailangan palitan: loggedin->homepage & new->loginPage  -->
+                    <a href="<?= BASE_URL ?>?page=login" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
                 </div>
             </article>
 
@@ -186,7 +189,8 @@
                 <div class="service-card__body">
                     <h3>Parts<br>Replacement</h3>
                     <p>Quality replacement of worn or damaged AC parts to keep your system running smoothly.</p>
-                    <a href="#" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
+                    <!-- Kailangan palitan: loggedin->homepage & new->loginPage  -->
+                    <a href="<?= BASE_URL ?>?page=login" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
                 </div>
             </article>
 
@@ -195,7 +199,8 @@
                 <div class="service-card__body">
                     <h3>AC<br>Maintenance</h3>
                     <p>Regular AC maintenance to prevent problems, improve efficiency, and extend system life.</p>
-                    <a href="#" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
+                    <!-- Kailangan palitan: loggedin->homepage & new->loginPage  -->
+                    <a href="<?= BASE_URL ?>?page=login" class="service-card__link">Learn more <i class="bi bi-arrow-right"></i></a>
                 </div>
             </article>
 
@@ -316,7 +321,7 @@
                 </div>
                 <p class="mainpersuade">Get Started with CoolFreeze Today</p>
                 <p class="getstarted__subtext">Book a service in just a few minutes and let our team take care of the rest.</p>
-                <div class="primarybtn"><a href="login.php">Book a Service</a><img src="frontend/assets/img/right.svg" alt="profiles"></div>
+                <div class="primarybtn"><a href="<?= BASE_URL ?>?page=login">Book a Service</a><img src="frontend/assets/img/right.svg" alt="profiles"></div>
             </div>
             <div class="getstarted__icons" aria-hidden="true">
                 <span class="getstarted__icon getstarted__icon--1"><i class="bi bi-send"></i></span>
