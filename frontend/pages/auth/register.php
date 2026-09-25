@@ -6,6 +6,8 @@
   <title>Create Account | CoolFreeze</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <script src="<?= BASE_URL . 'frontend/assets/js/eye-password.js' ?>"></script>
 </head>
 
 <!-- h-dvh + overflow-hidden: the page is exactly one screen tall and never scrolls -->
@@ -120,29 +122,37 @@
 
           <div>
             <label for="password" class="mb-1 block text-sm font-bold">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              autocomplete="new-password"
-              required
-              class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your password"
-            >
-            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="password"></p> <!-- NEW -->
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="new-password"
+                required
+                class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your password"
+              >
+              <i class="bi bi-eye toggle-password absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+                data-target="password"></i>
+            </div>
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="password"></p>
           </div>
 
           <div>
             <label for="confirm_password" class="mb-1 block text-sm font-bold">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm_password"
-              name="confirm_password"
-              autocomplete="new-password"
-              required
-              class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Confirm your password"
-            >
+            <div class="relative">
+              <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                autocomplete="new-password"
+                required
+                class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Confirm your password"
+              >
+              <i class="bi bi-eye toggle-password absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+                data-target="confirm_password"></i>
+            </div>
             <p class="field-error mt-1 hidden text-xs text-red-600" data-for="confirm_password"></p> <!-- NEW -->
           </div>
 
