@@ -29,7 +29,7 @@
 
 1. Open xampp app then run apache and mysql
 2. Open the xampp shell
-3. Go to the coolfreeze project, copy and paste this: `cd htdocs\coolfreeze`
+3. Go to the coolfreeze project, copy and paste this: `cd htdocs\cool_freeze`
 4. To use the query of schema.sql and insert_sample.sql in xampp
 5. Copy and paste this in xampp shell: `mysql -u root < database\schema.sql` after that,
 6. `mysql -u root < database\insert_sample.sql`
