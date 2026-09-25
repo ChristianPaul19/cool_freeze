@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Sora:wght@100..800&display=swap');
 html {
     scroll-behavior: smooth;
-    scrollbar-width: none;
 }
 :root {
     --primary-color: #FFF7E6;
@@ -18,7 +17,7 @@ html {
     --white: #FFFFFF;
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-    --container-max: 1100px;
+    --content-max: 1500px;
     --side-padding: clamp(20px, 6vw, 100px);
     --gap: 16px;
     --radius-card: 14px;
@@ -28,6 +27,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 li{
     list-style: none;
 }
@@ -78,6 +78,11 @@ p{
     gap: 5px;
     align-items: center;
 }
+.secondarybtn:hover{
+    fill: var(--blue-primary);
+    color: var(--blue-primary);
+    border: 1px solid var(--blue-primary);
+}
 .btncontainer{
     display: flex;
     flex-direction: row;
@@ -97,7 +102,7 @@ ul {
     z-index: 1000;
     width: auto;
     height: fit-content;
-    padding: 0 var(--side-padding);
+    padding: 5px var(--side-padding);
     backdrop-filter: blur(10px);
 }
 .rated{
@@ -121,6 +126,7 @@ ul {
     height: fit-content;
     display: flex;
     flex-direction: column;
+    align-items: start;
     gap: 5px;
     font-family: Sora;
     font-size: 13px;
@@ -175,6 +181,7 @@ ul {
     min-width: 0;
 }
 .herowrap {
+    max-width: var(--content-max);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -368,7 +375,7 @@ span {
 
 /*what we offer section*/
 .services-grid {
-    max-width: 1300px;
+    max-width: var(--content-max);
     margin: 40px auto 0;
     display: flex;
     flex-wrap: wrap;
@@ -454,7 +461,7 @@ span {
 }
 
 .process-grid {
-    max-width: 1300px;
+    max-width: var(--content-max);
     margin: 40px auto 0;
     display: flex;
     flex-wrap: wrap;
@@ -523,114 +530,6 @@ span {
     opacity: 0.75;
 }
 
-/* eto ung tablet responsiveness*/
-@media (max-width: 900px) {
-    .maintext {
-        font-size: 44px;
-    }
-
-    .herowrap {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 40px;
-    }
-
-    .herosection,
-    .btncontainer {
-        align-items: center;
-    }
-
-    .btncontainer {
-        justify-content: center;
-    }
-
-    .heroimage img {
-        max-width: 320px;
-    }
-
-    #whychooseus {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto;
-        min-height: 0;
-        row-gap: 40px;
-    }
-
-    .persuadecards:first-of-type,
-    .persuadeimg,
-    .persuadecards:last-of-type {
-        grid-column: 1;
-    }
-
-    .persuadecards:first-of-type { grid-row: 2; }
-    .persuadeimg { grid-row: 3; }
-    .persuadecards:last-of-type { grid-row: 4; }
-
-    .persuadecards {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .service-card,
-    .service-card--wide {
-        width: 100%;
-        max-width: 400px;
-    }
-    .herowave {
-        display: none;
-    }
-    .persuadeimg {
-        display: none;
-    }
-}
-
-/* dito ung mobile responsiveness*/
-@media (max-width: 560px) {
-    .maintext {
-        font-size: 34px;
-    }
-
-    .btncontainer {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #whatweoffer,
-    #howwework {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
-    .mainpersuade {
-        font-size: 24px;
-    }
-
-    .service-card,
-    .service-card--wide {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .persuadecard {
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .process-card {
-        width: 100%;
-        max-width: 400px;
-        height: auto;
-    }
-
-    .process-card__img {
-        height: 220px;
-    }
-    .navmenu .primarybtn{
-        display: none;
-    }
-}
-
 /* dito ung feedback*/
 #testimonials {
     width: 100%;
@@ -662,7 +561,7 @@ span {
 }
 
 .testimonial-grid {
-    max-width: 980px;
+    max-width: var(--content-max);
     margin: 40px auto 0;
     padding: 0 var(--side-padding);
     display: grid;
@@ -716,12 +615,14 @@ span {
 #getstarted {
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
     background: var(--primary-color);
     padding: 90px var(--side-padding);
 }
 
 .getstarted__inner {
-    max-width: var(--container-max);
+    max-width: var(--content-max);
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -751,34 +652,25 @@ span {
     max-width: 380px;
 }
 
-.getstarted__icons {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    flex-shrink: 0;
-    display: none;
-}
-
-.getstarted__icon {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--white);
-    color: var(--blue-primary);
+.getstarted__mockup {
+    flex: 1;
+    min-width: 0;
     display: flex;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
 }
 
-.getstarted__icon--1 { top: 0; left: 30px; }
-.getstarted__icon--2 { top: 60px; right: 0; background: var(--accent-color); color: var(--header-color); }
-.getstarted__icon--3 { bottom: 0; left: 10px; background: var(--blue-primary); color: var(--white); }
+.getstarted__mockup img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    display: block;
+    margin-right: auto;
+}
 
 /* dito ung footer*/
 #sitefooter {
+    padding: 0 var(--side-padding); 
     width: 100%;
     box-sizing: border-box;
     background: var(--header-color);
@@ -790,7 +682,7 @@ span {
     grid-template-columns: 1.4fr 1fr 1fr 1fr;
     gap: 40px;
     padding: 70px var(--side-padding) 50px;
-    max-width: 1100px;
+    max-width: var(--content-max);
     margin: 0 auto;
 }
 
@@ -866,7 +758,7 @@ span {
 .footer__bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px var(--side-padding);
-    max-width: 1100px;
+    max-width: var(--content-max);
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -896,16 +788,66 @@ span {
     color: var(--white);
 }
 
-/* ============================================
-   Tablet / Mobile — testimonials, getstarted, footer
-   ============================================ */
-@media (min-width: 901px) {
-    .getstarted__icons {
-        display: block;
-    }
-}
-
+/* eto ung tablet responsiveness*/
 @media (max-width: 900px) {
+    .maintext {
+        font-size: 44px;
+    }
+
+    .herowrap {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 40px;
+    }
+
+    .herosection,
+    .btncontainer {
+        align-items: center;
+    }
+    .btncontainer {
+        justify-content: center;
+    }
+
+    .heroimage img {
+        max-width: 320px;
+    }
+
+    #whychooseus {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        min-height: 0;
+        row-gap: 40px;
+    }
+
+    .persuadecards:first-of-type,
+    .persuadeimg,
+    .persuadecards:last-of-type {
+        grid-column: 1;
+    }
+
+    .persuadecards:first-of-type { grid-row: 2; }
+    .persuadeimg { grid-row: 3; }
+    .persuadecards:last-of-type { grid-row: 4; }
+
+    .persuadecards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .service-card,
+    .service-card--wide {
+        width: 100%;
+        max-width: 400px;
+    }
+    .herowave {
+        display: none;
+    }
+    .persuadeimg {
+        display: none;
+    }
+
     .testimonial-grid {
         grid-template-columns: 1fr;
         max-width: 420px;
@@ -924,6 +866,13 @@ span {
     .getstarted__text .mainpersuade {
         text-align: center;
     }
+    .getstarted__mockup {
+    width: 100%;
+    }
+    .getstarted__mockup img {
+        max-width: 340px;
+        margin: 0 auto;
+    }
 
     .footer__top {
         grid-template-columns: 1fr 1fr;
@@ -938,7 +887,51 @@ span {
     }
 }
 
+/* dito ung mobile responsiveness*/
 @media (max-width: 560px) {
+    .maintext {
+        font-size: 34px;
+    }
+
+    .btncontainer {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    }
+
+    #whatweoffer,
+    #howwework {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .mainpersuade {
+        font-size: 24px;
+    }
+
+    .service-card,
+    .service-card--wide {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .persuadecard {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .process-card {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+    }
+
+    .process-card__img {
+        height: 220px;
+    }
+    .navmenu .primarybtn{
+        display: none;
+    }
     .footer__top {
         grid-template-columns: 1fr;
         padding: 50px 6% 40px;
@@ -947,5 +940,9 @@ span {
     .footer__bottom {
         flex-direction: column;
         text-align: center;
+    }
+    .getstarted__mockup img {
+    max-width: 280px;
+    margin: 0 auto;
     }
 }

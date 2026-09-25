@@ -323,10 +323,8 @@
                 <p class="getstarted__subtext">Book a service in just a few minutes and let our team take care of the rest.</p>
                 <a href="<?= BASE_URL ?>?page=login"><div class="primarybtn">Book a Service<img src="frontend/assets/img/right.svg" alt="profiles"></div></a>
             </div>
-            <div class="getstarted__icons" aria-hidden="true">
-                <span class="getstarted__icon getstarted__icon--1"><i class="bi bi-send"></i></span>
-                <span class="getstarted__icon getstarted__icon--2"><i class="bi bi-bullseye"></i></span>
-                <span class="getstarted__icon getstarted__icon--3"><i class="bi bi-lightning-charge-fill"></i></span>
+            <div class="getstarted__mockup">
+                <img src="frontend/assets/img/mockup.png" alt="CoolFreeze reports dashboard preview">
             </div>
         </div>
     </section>
