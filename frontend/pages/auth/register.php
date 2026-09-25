@@ -42,7 +42,7 @@
         <h2 class="mb-2 text-xl font-bold text-blue-600 md:hidden">COOLFREEZE</h2>
 
         <div class="mb-3 flex items-center justify-between gap-3">
-          <a href="<?= BASE_URL ?>?page=home" class="inline-flex" aria-label="Back to home">
+          <a href="<?= BASE_URL ?>?page=landing" class="inline-flex" aria-label="Back to home">
             <img
               class="h-6 w-6"
               src="<?= BASE_URL . 'frontend/assets/img/back-arrow.svg' ?>"

@@ -13,6 +13,7 @@ if (!empty($_SESSION['customer_id'])) {
   <title>Login Account | CoolFreeze</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="https://jsdelivr.net">
 </head>
 
 <body class="h-dvh overflow-hidden bg-white text-gray-900 antialiased">
@@ -26,7 +27,7 @@ if (!empty($_SESSION['customer_id'])) {
         <h2 class="mb-2 text-xl font-bold text-blue-600 md:hidden">COOLFREEZE</h2>
 
         <div class="mb-3 flex items-center justify-between gap-3">
-          <a href="<?= BASE_URL ?>?page=home" class="inline-flex" aria-label="Back to home">
+          <a href="<?= BASE_URL ?>?page=landing" class="inline-flex" aria-label="Back to landing">
             <img class="h-6 w-6" src="<?= BASE_URL . 'frontend/assets/img/back-arrow.svg' ?>" alt="Back">
           </a>
           <small class="text-sm text-gray-500">
@@ -78,6 +79,7 @@ if (!empty($_SESSION['customer_id'])) {
               class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Enter your password"
             >
+            <i class="bi bi-eye"></i>
             <p class="field-error mt-1 hidden text-xs text-red-600" data-for="password"></p>
           </div>
 
