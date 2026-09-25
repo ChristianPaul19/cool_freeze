@@ -21,7 +21,7 @@ $pages = [
     'set_password' => 'auth/set_password.php',
     'error404' => 'error/error404.php',
     'maintenance' => 'error/maintenance.php',
-    'services' => 'services.php',
+    'services' => 'servicesmain.php',
     
 ];
 
