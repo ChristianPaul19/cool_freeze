@@ -91,7 +91,7 @@ function e($value)
             <p class="menu-title">Dashboard</p>
 
             <a
-                href="<?= BASE_URL ?>frontend/pages/main/home.php"
+                href="index.php"
                 class="menu-link"
             >
                 <i class="fa-solid fa-house"></i>

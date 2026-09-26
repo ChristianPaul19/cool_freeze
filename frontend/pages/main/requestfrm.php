@@ -1,3 +1,49 @@
+<?php
+
+require_once dirname(__DIR__, 3) . '/backend/bootstrap.php';
+
+$userName = $_SESSION['username'] ?? 'Customer';
+
+$currentPage = 'requestForm';
+
+// Sidebar menu
+$menu = [
+    [
+        'title' => 'Services',
+        'items' => [
+            ['label' => 'Services', 'icon' => 'fa-screwdriver-wrench', 'link' => 'servicesmain.php'],
+        ]
+    ],
+    [
+        'title' => 'Cart',
+        'items' => [
+            ['label' => 'Service Cart', 'icon' => 'fa-cart-shopping', 'link' => 'cart.php'],
+        ]
+    ],
+    [
+        'title' => 'Service Requests',
+        'items' => [
+            ['label' => 'My Requests', 'icon' => 'fa-clipboard-list', 'link' => 'requests.php'],
+        ]
+    ],
+    [
+        'title' => 'System',
+        'items' => [
+            ['label' => 'Profile', 'icon' => 'fa-user', 'link' => 'profile.php'],
+            ['label' => "Helps and FAQ's", 'icon' => 'fa-circle-question', 'link' => 'faqs.php'],
+            ['label' => 'Settings', 'icon' => 'fa-gear', 'link' => 'settings.php'],
+        ]
+    ],
+];
+
+function e($value)
+{
+    return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +71,7 @@
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="request-form.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/requestfrm.css">
 
     <link
         rel="stylesheet"
@@ -44,66 +90,71 @@
 
     <aside class="sidebar" id="sidebar">
 
-        <img
-            class="imglogo"
-            src="frontend/assets/img/coolfreeze_horizontal_logo.svg"
-            alt="CoolFreeze"
-        >
+        <img class="imglogo"
+                        src="<?= BASE_URL ?>frontend/assets/img/coolfreeze_horizontal_logo.svg"
+                        alt="Bright living room with a grey sofa"
+                        class="card-img"
+                    >
 
         <nav class="menu">
 
+            <!-- DASHBOARD -->
+
             <p class="menu-title">Dashboard</p>
 
-            <a href="index.php" class="menu-link">
+            <a
+                href="<?= BASE_URL ?>frontend/pages/main/home.php"
+                class="menu-link"
+            >
                 <i class="fa-solid fa-house"></i>
                 Home
             </a>
 
-            <p class="menu-title">Services</p>
 
-            <a href="service.php" class="menu-link">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                Services
-            </a>
+            <!-- OTHER MENU SECTIONS -->
 
-            <p class="menu-title">Cart</p>
+            <?php foreach ($menu as $section): ?>
 
-            <a href="cart.php" class="menu-link active">
-                <i class="fa-solid fa-cart-shopping"></i>
-                Service Cart
-            </a>
+                <p class="menu-title">
+                    <?= e($section['title']) ?>
+                </p>
 
-            <p class="menu-title">Service Requests</p>
+                <?php foreach ($section['items'] as $item): ?>
 
-            <a href="requests.php" class="menu-link">
-                <i class="fa-solid fa-clipboard-list"></i>
-                My Requests
-            </a>
+                    <a
+                        href="<?= e($item['link']) ?>"
+                        class="menu-link <?= $item['link'] === 'service.php' ? 'active' : '' ?>"
+                    >
 
-            <p class="menu-title">System</p>
+                        <i class="fa-solid <?= e($item['icon']) ?>"></i>
 
-            <a href="profile.php" class="menu-link">
-                <i class="fa-solid fa-user"></i>
-                Profile
-            </a>
+                        <?= e($item['label']) ?>
 
-            <a href="faqs.php" class="menu-link">
-                <i class="fa-solid fa-circle-question"></i>
-                Helps and FAQ's
-            </a>
+                    </a>
 
-            <a href="settings.php" class="menu-link">
-                <i class="fa-solid fa-gear"></i>
-                Settings
-            </a>
+                <?php endforeach; ?>
+
+            <?php endforeach; ?>
 
         </nav>
 
-        <form action="backend/api/logout.php" method="POST" class="logout-form">
+
+        <!-- LOGOUT -->
+
+        <form
+            action="<?= BASE_URL ?>backend/api/logout.php"
+            method="POST"
+            class="logout-form"
+        >
+
             <button type="submit" class="logout">
+
                 <i class="fa-solid fa-right-from-bracket"></i>
+
                 Log out
+
             </button>
+
         </form>
 
     </aside>
@@ -135,33 +186,73 @@
                 aria-label="Open menu"
                 aria-expanded="false"
             >
+
                 <i class="fa-solid fa-bars"></i>
+
             </button>
 
-            <form class="search" action="search.php" method="GET">
+
+            <!-- SEARCH -->
+
+            <form
+                class="search"
+                action="search.php"
+                method="GET"
+            >
+
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="search" name="q" placeholder="Search">
+
+                <input
+                    type="search"
+                    name="q"
+                    placeholder="Search"
+                >
+
             </form>
+
+
+            <!-- TOP ACTIONS -->
 
             <div class="top-actions">
 
-                <a href="notifications.php" class="icon-link" aria-label="Notifications">
+                <a
+                    href="notifications.php"
+                    class="icon-link"
+                    aria-label="Notifications"
+                >
+
                     <i class="fa-solid fa-bell"></i>
+
                 </a>
 
-                <a href="cart.php" class="icon-link" aria-label="Cart">
+
+                <a
+                    href="cart.php"
+                    class="icon-link"
+                    aria-label="Cart"
+                >
+
                     <i class="fa-solid fa-cart-shopping"></i>
+
                 </a>
 
-                <a href="profile.php" class="profile-link">
+
+                <a
+                    href="profile.php"
+                    class="profile-link"
+                >
+
                     <i class="fa-solid fa-user"></i>
-                    <span>Juan Tuy</span>
+
+                    <span>
+                        <?= e($userName) ?>
+                    </span>
+
                 </a>
 
             </div>
 
         </header>
-
 
         <!-- =================================================
              REQUEST FORM CONTENT
