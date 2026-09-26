@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Set New Password | CoolFreeze</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <script src="<?= BASE_URL . 'frontend/assets/js/eye-password.js' ?>"></script>
 </head>
 
 <!-- h-dvh + overflow-hidden: the page is exactly one screen tall and never scrolls -->
@@ -38,93 +40,44 @@
             Create a new password, ensure it differs from the previous ones for security.
           </p>
 
-          <form class="mt-6 space-y-4" method="post" action="">
+          <form class="mt-3 space-y-4" method="post" action="">
 
             <!-- Password -->
             <div>
-              <label for="password" class="mb-1 block text-sm font-bold">Password</label>
-
-              <div class="relative">
-                <!-- Key icon -->
-                <svg
-                  class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <circle cx="7.5" cy="15.5" r="4.5"></circle>
-                  <path d="m10.7 12.3 9.8-9.8"></path>
-                  <path d="m17 6 3 3"></path>
-                  <path d="m14 9 2 2"></path>
-                </svg>
-
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  autocomplete="new-password"
-                  required
-                  class="w-full rounded-md border border-blue-100 bg-blue-50 py-2.5 pl-10 pr-11 text-base outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your password"
-                >
-
-                <!-- Eye icon (show/hide password) -->
-                <button
-                  type="button"
-                  class="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded text-gray-500 hover:text-gray-700"
-                  aria-label="Show password"
-                >
-                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                </button>
-              </div>
+            <label for="password" class="mb-1 block text-sm font-bold">Password</label>
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="new-password"
+                required
+                class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your password"
+              >
+              <i class="bi bi-eye toggle-password absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+                data-target="password"></i>
             </div>
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="password"></p>
+          </div>
 
-            <!-- Confirm Password -->
-            <div>
-              <label for="confirm_password" class="mb-1 block text-sm font-bold">Confirm Password</label>
-
-              <div class="relative">
-                <!-- Key icon -->
-                <svg
-                  class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <circle cx="7.5" cy="15.5" r="4.5"></circle>
-                  <path d="m10.7 12.3 9.8-9.8"></path>
-                  <path d="m17 6 3 3"></path>
-                  <path d="m14 9 2 2"></path>
-                </svg>
-
-                <input
-                  type="password"
-                  id="confirm_password"
-                  name="confirm_password"
-                  autocomplete="new-password"
-                  required
-                  class="w-full rounded-md border border-blue-100 bg-blue-50 py-2.5 pl-10 pr-11 text-base outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                  placeholder="Confirm your password"
-                >
-
-                <!-- Eye icon (show/hide password) -->
-                <button
-                  type="button"
-                  class="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded text-gray-500 hover:text-gray-700"
-                  aria-label="Show password"
-                >
-                  <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                </button>
-              </div>
+          <div>
+            <label for="confirm_password" class="mb-1 block text-sm font-bold">Confirm Password</label>
+            <div class="relative">
+              <input
+                type="password"
+                id="confirm_password"
+                name="confirm_password"
+                autocomplete="new-password"
+                required
+                class="w-full rounded-md bg-gray-100 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Confirm your password"
+              >
+              <i class="bi bi-eye toggle-password absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500"
+                data-target="confirm_password"></i>
             </div>
+            <p class="field-error mt-1 hidden text-xs text-red-600" data-for="confirm_password"></p> <!-- NEW -->
+          </div>
 
             <button
               type="submit"
