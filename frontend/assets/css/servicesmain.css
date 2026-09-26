@@ -961,13 +961,13 @@ select {
 
     inset: 0;
 
-    align-items: flex-start;
+    align-items: center;
 
     justify-content: center;
 
-    padding: 40px 16px;
+    padding: 24px 16px;
 
-    overflow-y: auto;
+    overflow: hidden;
 
     background: rgba(30, 41, 63, 0.55);
 
@@ -985,8 +985,6 @@ select {
 
     max-width: 760px;
 
-    max-height: calc(100vh - 80px);
-
     display: flex;
 
     flex-direction: column;
@@ -1000,8 +998,6 @@ select {
 
 .modal-scroll {
     padding: 30px 30px 8px;
-
-    overflow-y: auto;
 }
 
 .modal-close {
@@ -1232,7 +1228,9 @@ select {
     color: var(--text);
 }
 
-.field select {
+.field select,
+.field input,
+.field textarea {
     height: 38px;
 
     padding: 0 12px;
@@ -1250,10 +1248,29 @@ select {
     font-weight: 500;
 }
 
-.field select:focus {
+.field textarea {
+    height: auto;
+
+    padding: 10px 12px;
+
+    resize: vertical;
+
+    font-family: inherit;
+
+    line-height: 1.4;
+}
+
+.field select:focus,
+.field input:focus,
+.field textarea:focus {
     outline: 0;
 
     border-color: var(--primary);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: var(--muted);
 }
 
 .qty {
@@ -1395,7 +1412,308 @@ select {
 }
 
 
-/* ---------- Review (step 3) ---------- */
+/* ---------- Step 2: Schedule & Location ---------- */
+
+.schedule-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 14px;
+
+    margin-bottom: 14px;
+}
+
+.schedule-grid-2 {
+    grid-template-columns: 1fr 1fr;
+
+    margin-bottom: 0;
+}
+
+.info-card {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    padding: 14px;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+}
+
+.info-card-head {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+.info-card-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color: var(--text);
+}
+
+.info-card-title i {
+    color: var(--primary);
+
+    font-size: 11px;
+}
+
+.info-card .field {
+    margin-bottom: 12px;
+}
+
+.info-card .field:last-child {
+    margin-bottom: 0;
+}
+
+.service-summary {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 12px;
+}
+
+.summary-item {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    font-size: 10px;
+
+    color: var(--muted);
+}
+
+.summary-item strong {
+    max-width: 65%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 10.5px;
+
+    font-weight: 700;
+
+    color: var(--text);
+
+    text-align: right;
+}
+
+.summary-total {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-top: 10px;
+
+    border-top: 1px solid var(--border);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: var(--text);
+}
+
+.summary-total strong {
+    font-size: 13px;
+
+    color: var(--primary);
+}
+
+.field-error {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin: 12px 0 0;
+
+    padding: 9px 12px;
+
+    border-radius: 8px;
+
+    background: var(--danger-bg);
+
+    color: var(--danger);
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+/* ---------- Step 3: Success ---------- */
+
+.success-screen {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 10px 10px 6px;
+
+    text-align: center;
+}
+
+.success-art {
+    width: 100%;
+
+    max-width: 220px;
+
+    margin-bottom: 8px;
+}
+
+.success-art svg {
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+}
+
+.success-title {
+    margin: 6px 0 6px;
+
+    font-family: "Sora", sans-serif;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    color: var(--text);
+}
+
+.success-sub {
+    margin: 0 0 20px;
+
+    max-width: 380px;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    color: var(--muted);
+}
+
+.success-summary {
+    display: flex;
+
+    width: 100%;
+
+    max-width: 380px;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.success-summary-item {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 12px;
+
+    background: var(--lightest-blue);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+    text-align: left;
+}
+
+.success-summary-item span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 8.5px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+
+    color: var(--muted);
+}
+
+.success-summary-item strong {
+    display: block;
+
+    font-size: 12.5px;
+
+    font-weight: 800;
+
+    color: var(--text);
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.success-actions {
+    display: flex;
+
+    width: 100%;
+
+    max-width: 380px;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 6px;
+}
+
+.success-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+
+/* ---------- Review (legacy, still used defensively) ---------- */
 
 .review-box {
     display: flex;
@@ -1456,6 +1774,10 @@ select {
 
 .modal-footer.has-back {
     justify-content: space-between;
+}
+
+.modal-footer.hidden {
+    display: none;
 }
 
 .footer-actions {
@@ -2118,6 +2440,11 @@ select {
     .info-col {
         order: -1;
     }
+
+    .schedule-grid,
+    .schedule-grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 
@@ -2353,6 +2680,15 @@ select {
     .date {
         font-size: 8px;
     }
+
+    .schedule-grid,
+    .schedule-grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .success-summary {
+        flex-direction: column;
+    }
 }
 
 
@@ -2373,4 +2709,4 @@ select {
     .hero h1 {
         font-size: 22px;
     }
-}   
+}
