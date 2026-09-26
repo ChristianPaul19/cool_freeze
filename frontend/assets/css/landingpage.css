@@ -191,6 +191,7 @@ ul {
   display: flex;
   min-width: 0;
 }
+
 .heroimage img {
   width: 100%;
   height: 500px;
@@ -376,6 +377,7 @@ span {
   justify-content: center;
   gap: 24px;
 }
+
 
 .service-card {
   width: 400px;
@@ -678,6 +680,7 @@ span {
   gap: var(--gap);
 }
 
+
 .testimonial-card {
   background: var(--primary-color);
   border-radius: var(--radius-card);
@@ -895,6 +898,7 @@ span {
   gap: 10px;
 }
 
+
 .footer__bottom p {
   font-family: "DM Sans";
   font-size: 12px;
@@ -958,6 +962,7 @@ span {
   }
 }
 
+/* dito ung mobile responsiveness*/
 @media (max-width: 560px) {
   .footer__top {
     grid-template-columns: 1fr;
