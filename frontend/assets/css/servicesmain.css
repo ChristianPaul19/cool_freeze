@@ -47,7 +47,7 @@
     --radius-sm: 8px;
     --radius-md: 14px;
 
-    --sidebar-w: 155px;
+    --sidebar-w: 240px;
 }
 
 
@@ -158,17 +158,17 @@ select {
 .menu {
     flex: 1;
 
-    padding: 8px 12px 10px;
+    padding: 24px;
 }
 
 .menu-title {
     margin: 15px 0 7px 7px;
 
-    font-size: 7px;
+    font-size: 10px;
 
-    line-height: 1;
+    line-height: 2;
 
-    font-weight: 700;
+    font-weight: 900;
 
     letter-spacing: 0.5px;
 
@@ -195,7 +195,7 @@ select {
 
     border-radius: 6px;
 
-    font-size: 10px;
+    font-size: 13px;
 
     font-weight: 600;
 
