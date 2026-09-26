@@ -11,7 +11,7 @@ if (MAINTENANCE_MODE && APP_ENV !== 'local') {
 }
 
 $pages = [
-    'home' => 'home.php',
+    'home' => 'main/home.php',
     'landing' => 'landing.php',
     'login' => 'auth/login.php',
     'register' => 'auth/register.php',
