@@ -11,7 +11,7 @@
 <body>
     <div class="navmenu">
         <ul>
-            <li class="logo"><img src="frontend/assets/img/CoolFreeze_Logo.svg" alt="profiles"></li>
+            <li class="logo"><img src="frontend/assets/img/coolfreeze_horizontal_logo.svg" width="250px" height="50px" alt="profiles"></li>
             <a href="<?= BASE_URL ?>?page=login" ><li class="primarybtn">Register<img src="frontend/assets/img/right.svg" alt="profiles"></li></a>
         </ul>
     </div>
