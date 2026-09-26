@@ -16,9 +16,8 @@ html {
     --blue-light: #EAF3FF;
     --white: #FFFFFF;
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-    --content-max: 1500px;
-    --side-padding: clamp(20px, 6vw, 100px);
+    --content-max: none;
+    --side-padding: 100px;
     --gap: 16px;
     --radius-card: 14px;
 }
@@ -150,14 +149,14 @@ ul {
 }
 .maintext {
     font-family: sora;
-    font-size: 60px;
+    font-size: 3.75em;
     font-weight: bold;
     color: var(--header-color);
     line-height: 1;
 }
 .subtext {
     font-family: "DM Sans";
-    font-size: 15px;
+    font-size: 1em;
     font-weight: 500;
     color: var(--secondarytext-color);
 }
@@ -181,28 +180,29 @@ ul {
     min-width: 0;
 }
 .herowrap {
-    max-width: var(--content-max);
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    margin: 0 auto;
+    margin: 0;
     padding: 100px var(--side-padding) 150px;
     flex: 1;
-    width: 100%;
     box-sizing: border-box;
 }
 .heroimage {
     flex: 1;
     display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 0;
 }
+
 .heroimage img {
-    width: 100%;
-    height: 500px;
+    width: fit-content;
+    height: fit-content;
     object-fit: cover;
     border-radius: 16px;
-    display: block;
 }
 .herowave {
     line-height: 0;
@@ -218,7 +218,7 @@ ul {
  
 .serviceautoscrollcontent {
     font-family: Sora;
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 500px;
     position: relative;
     display: flex;
@@ -264,7 +264,7 @@ span {
 }
 .question p{
     font-family: sora;
-    font-size: 20px;
+    font-size: 1.25em;
     font-weight: 500;
     color: var(--secondary-color);
 }
@@ -275,13 +275,13 @@ span {
 }
 .mainpersuade{
     font-family: sora;
-    font-size: 30px;
+    font-size: 2em;
     font-weight: 700;
     color: var(--secondary-color);
 }
 .persuade{
     font-family: "DM Sans";
-    font-size: 15px;
+    font-size: 1em;
     font-weight: 400;
     color: var(--secondary-color);
 }
@@ -375,13 +375,14 @@ span {
 
 /*what we offer section*/
 .services-grid {
-    max-width: var(--content-max);
-    margin: 40px auto 0;
+    width: 100%;
+    margin: 40px 0 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 24px;
 }
+
 
 .service-card {
     width: 400px;
@@ -461,8 +462,8 @@ span {
 }
 
 .process-grid {
-    max-width: var(--content-max);
-    margin: 40px auto 0;
+    width: 100%;
+    margin: 40px 0 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -561,13 +562,14 @@ span {
 }
 
 .testimonial-grid {
-    max-width: var(--content-max);
-    margin: 40px auto 0;
-    padding: 0 var(--side-padding);
+    width: 100%;
+    margin: 40px 0 0;
+    padding: 0 100px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--gap);
 }
+
 
 .testimonial-card {
     background: var(--primary-color);
@@ -615,22 +617,19 @@ span {
 #getstarted {
     width: 100%;
     box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
     background: var(--primary-color);
     padding: 90px var(--side-padding);
 }
 
 .getstarted__inner {
-    max-width: var(--content-max);
-    margin: 0 auto;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+    gap: 80px;
 }
 
 .getstarted__text {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -656,7 +655,7 @@ span {
     flex: 1;
     min-width: 0;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -665,25 +664,24 @@ span {
     max-width: 460px;
     height: auto;
     display: block;
-    margin-right: auto;
 }
+
 
 /* dito ung footer*/
 #sitefooter {
-    padding: 0 var(--side-padding); 
     width: 100%;
     box-sizing: border-box;
     background: var(--header-color);
     color: #CBD5E1;
+    padding: 0 var(--side-padding);
 }
 
 .footer__top {
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr 1fr;
     gap: 40px;
-    padding: 70px var(--side-padding) 50px;
-    max-width: var(--content-max);
-    margin: 0 auto;
+    padding: 70px 0 50px;
+    width: 100%;
 }
 
 .footer__brand img {
@@ -757,15 +755,15 @@ span {
 
 .footer__bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px var(--side-padding);
-    max-width: var(--content-max);
-    margin: 0 auto;
+    padding: 20px 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10px;
 }
+
 
 .footer__bottom p {
     font-family: "DM Sans";
@@ -790,6 +788,9 @@ span {
 
 /* eto ung tablet responsiveness*/
 @media (max-width: 900px) {
+    :root {
+    --side-padding: 40px;
+    }
     .maintext {
         font-size: 44px;
     }
@@ -889,6 +890,9 @@ span {
 
 /* dito ung mobile responsiveness*/
 @media (max-width: 560px) {
+    :root {
+    --side-padding: 16px;
+    }
     .maintext {
         font-size: 34px;
     }
@@ -897,12 +901,6 @@ span {
     flex-wrap: wrap;
     justify-content: center;
     gap: 12px;
-    }
-
-    #whatweoffer,
-    #howwework {
-        padding-left: 16px;
-        padding-right: 16px;
     }
 
     .mainpersuade {

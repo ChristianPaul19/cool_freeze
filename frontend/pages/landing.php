@@ -45,7 +45,7 @@
             </div>
 
             <div class="heroimage">
-                <img src="frontend/assets/img/onecarousel.png" alt="Technician servicing an air conditioning unit">
+                <img src="frontend/assets/img/Mokker.svg" alt="Technician servicing an air conditioning unit">
             </div>
         </div>
 
@@ -323,6 +323,7 @@
                 <p class="getstarted__subtext">Book a service in just a few minutes and let our team take care of the rest.</p>
                 <a href="<?= BASE_URL ?>?page=login"><div class="primarybtn">Book a Service<img src="frontend/assets/img/right.svg" alt="profiles"></div></a>
             </div>
+            
             <div class="getstarted__mockup">
                 <img src="frontend/assets/img/mockup.png" alt="CoolFreeze reports dashboard preview">
             </div>
