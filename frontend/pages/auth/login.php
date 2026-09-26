@@ -15,6 +15,7 @@ if (!empty($_SESSION['customer_id'])) {
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <script src="<?= BASE_URL . 'frontend/assets/js/eye-password.js' ?>"></script>
+  <link rel="stylesheet" href="<?= BASE_URL . 'frontend/assets/css/font-style.css' ?>">
 </head>
 
 <body class="h-dvh overflow-hidden bg-white text-gray-900 antialiased">
