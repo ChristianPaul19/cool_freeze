@@ -1,6 +1,6 @@
 <?php
 
-define('APP_NAME', 'Cool Freeze');
+define('APP_NAME', 'CoolFreeze');
 
 $host = $_SERVER['HTTP_HOST'] ?? '';
 $host = preg_replace('/:\d+$/', '', strtolower($host));
