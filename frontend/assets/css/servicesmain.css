@@ -148,37 +148,9 @@ select {
    SIDEBAR BRAND
 ========================================================= */
 
-.brand {
-    display: flex;
-    align-items: center;
-
-    gap: 7px;
-
-    height: 46px;
-    min-height: 46px;
-
-    padding: 0 13px;
-
-    font-family: "Sora", sans-serif;
-
-    color: var(--primary);
+.imglogo{
+    padding: 9px;
 }
-
-.brand i {
-    font-size: 16px;
-}
-
-.brand span {
-    color: var(--primary-dark);
-
-    font-size: 12px;
-
-    font-weight: 800;
-
-    letter-spacing: 0.8px;
-}
-
-
 /* =========================================================
    SIDEBAR MENU
 ========================================================= */

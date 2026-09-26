@@ -78,12 +78,12 @@ function e($value)
     ====================================================== -->
 
     <aside class="sidebar" id="sidebar">
-
-        <a href="index.php" class="brand">
-            <i class="fa-regular fa-snowflake"></i>
-            <span>COOLFREEZE</span>
-        </a>
-
+        
+        <img class="imglogo"
+                        src="<?= BASE_URL ?>frontend/assets/img/coolfreeze_horizontal_logo.svg"
+                        alt="Bright living room with a grey sofa"
+                        class="card-img"
+                    >
         <nav class="menu">
 
             <!-- DASHBOARD -->
