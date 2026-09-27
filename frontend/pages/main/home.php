@@ -12,7 +12,7 @@ $menu = [
     [
         'title' => 'Services',
         'items' => [
-            ['label' => 'Services', 'icon' => 'fa-screwdriver-wrench', 'link' => 'service.php'],
+            ['label' => 'Services', 'icon' => 'fa-screwdriver-wrench', 'link' => 'servicesmain.php'],
         ]
     ],
     [
@@ -210,7 +210,7 @@ function statusClass($status)
                         Services
                     </h2>
 
-                    <a href="service.php" class="view-all">
+                    <a href="<?= BASE_URL ?>frontend/pages/main/servicesmain.php" class="view-all">
                         View all
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>

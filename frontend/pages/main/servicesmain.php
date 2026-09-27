@@ -1024,6 +1024,251 @@ function e($value)
             </div>
 
 
+            <!-- STEP 2 -->
+
+            <div
+                class="step-panel"
+                data-panel="2"
+            >
+
+                <div class="schedule-grid">
+
+
+                    <!-- SERVICE DETAILS SUMMARY -->
+
+                    <div class="info-card">
+
+                        <div class="info-card-head">
+
+                            <span class="info-card-title">
+
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                                Service Details
+
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="service-summary"
+                            id="serviceSummary"
+                        ></div>
+
+
+                        <div class="summary-total">
+
+                            <span>
+                                Estimated Total
+                            </span>
+
+                            <strong id="summaryTotal">
+                                &mdash;
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SCHEDULE -->
+
+                    <div class="info-card">
+
+                        <div class="info-card-head">
+
+                            <span class="info-card-title">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                                Schedule
+
+                            </span>
+
+                        </div>
+
+
+                        <label class="field">
+
+                            <span>
+                                Preferred Date
+                            </span>
+
+                            <input
+                                type="date"
+                                id="preferredDate"
+                            >
+
+                        </label>
+
+
+                        <label class="field">
+
+                            <span>
+                                Preferred Time
+                            </span>
+
+                            <select id="preferredTime">
+
+                                <option value="">
+                                    Select a time slot
+                                </option>
+
+                                <option>8:00 AM - 9:00 AM</option>
+                                <option>9:00 AM - 10:00 AM</option>
+                                <option>10:00 AM - 11:00 AM</option>
+                                <option>1:00 PM - 2:00 PM</option>
+                                <option>2:00 PM - 3:00 PM</option>
+                                <option>3:00 PM - 4:00 PM</option>
+
+                            </select>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- SERVICE ADDRESS -->
+
+                    <div class="info-card">
+
+                        <div class="info-card-head">
+
+                            <span class="info-card-title">
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Service Address
+
+                            </span>
+
+                        </div>
+
+
+                        <label class="field">
+
+                            <span>
+                                Complete Address
+                            </span>
+
+                            <textarea
+                                id="serviceAddress"
+                                rows="4"
+                                placeholder="House/Unit No., Street, Barangay, City, Province"
+                            ></textarea>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="schedule-grid schedule-grid-2">
+
+
+                    <!-- NOTE -->
+
+                    <div class="info-card">
+
+                        <div class="info-card-head">
+
+                            <span class="info-card-title">
+
+                                <i class="fa-solid fa-note-sticky"></i>
+
+                                Note
+
+                            </span>
+
+                        </div>
+
+
+                        <label class="field">
+
+                            <span>
+                                Description / Instructions
+                            </span>
+
+                            <textarea
+                                id="serviceNote"
+                                rows="3"
+                                placeholder="e.g. Please clean it and check if there are any issues with the unit. Thank you!"
+                            ></textarea>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- CONTACT -->
+
+                    <div class="info-card">
+
+                        <div class="info-card-head">
+
+                            <span class="info-card-title">
+
+                                <i class="fa-solid fa-address-card"></i>
+
+                                Contact
+
+                            </span>
+
+                        </div>
+
+
+                        <label class="field">
+
+                            <span>
+                                Full Name
+                            </span>
+
+                            <input
+                                type="text"
+                                id="contactName"
+                                placeholder="Juan Dela Cruz"
+                            >
+
+                        </label>
+
+
+                        <label class="field">
+
+                            <span>
+                                Phone Number
+                            </span>
+
+                            <input
+                                type="tel"
+                                id="contactPhone"
+                                placeholder="0999-999-9999"
+                            >
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    class="field-error"
+                    id="step2Error"
+                    style="display:none;"
+                >
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    Please fill in the date, time, address and contact
+                    details before submitting.
+
+                </p>
+
+            </div>
+
+
             <!-- STEP 3 -->
 
             <div
@@ -1031,10 +1276,94 @@ function e($value)
                 data-panel="3"
             >
 
-                <div
-                    class="review-box"
-                    id="reviewBox"
-                ></div>
+                <div class="success-screen">
+
+                    <div class="success-art">
+
+                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+
+                            <circle cx="100" cy="80" r="72" style="fill:var(--lightest-blue);"></circle>
+
+                            <rect x="60" y="40" width="80" height="98" rx="10" style="fill:var(--white);stroke:var(--border);stroke-width:2;"></rect>
+
+                            <rect x="75" y="30" width="50" height="16" rx="6" style="fill:var(--primary);"></rect>
+
+                            <rect x="72" y="58" width="56" height="6" rx="3" style="fill:var(--chip-bg);"></rect>
+                            <rect x="72" y="70" width="56" height="6" rx="3" style="fill:var(--chip-bg);"></rect>
+                            <rect x="72" y="82" width="36" height="6" rx="3" style="fill:var(--chip-bg);"></rect>
+
+                            <circle cx="100" cy="112" r="20" style="fill:var(--green);"></circle>
+
+                            <path
+                                d="M91 112l6 6 12-13"
+                                style="fill:none;stroke:var(--white);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;"
+                            ></path>
+
+                        </svg>
+
+                    </div>
+
+
+                    <h3 class="success-title">
+                        Service Request Submitted!
+                    </h3>
+
+                    <p class="success-sub">
+                        Your service request has been successfully
+                        submitted. You will receive an update once
+                        it's been reviewed by our team.
+                    </p>
+
+
+                    <div class="success-summary">
+
+                        <div class="success-summary-item">
+
+                            <span>
+                                Request Number
+                            </span>
+
+                            <strong id="successRequestNumber">
+                                &mdash;
+                            </strong>
+
+                        </div>
+
+
+                        <div class="success-summary-item">
+
+                            <span>
+                                Estimated Total
+                            </span>
+
+                            <strong id="successTotal">
+                                &mdash;
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="success-actions">
+
+                        <a
+                            href="requests.php"
+                            class="btn-primary success-btn"
+                        >
+                            View My Request
+                        </a>
+
+                        <a
+                            href="index.php"
+                            class="btn-outline success-btn"
+                        >
+                            Back to Home
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1081,17 +1410,9 @@ function e($value)
                     id="btnStepNext"
                     style="display:none;"
                 >
-                    Continue
-                </button>
+                    Submit Request
 
-
-                <button
-                    type="button"
-                    class="btn-primary"
-                    id="btnSubmitRequest"
-                    style="display:none;"
-                >
-                    Confirm &amp; Submit Request
+                    <i class="fa-solid fa-paper-plane"></i>
                 </button>
 
             </div>
@@ -1210,14 +1531,48 @@ function e($value)
     var includesList =
         document.getElementById('includesList');
 
-    var reviewBox =
-        document.getElementById('reviewBox');
-
     var qtyInput =
         document.getElementById('qtyInput');
 
     var acUnitTypeSelect =
         document.getElementById('acUnitTypeSelect');
+
+    var serviceTypeSelect =
+        document.getElementById('serviceTypeSelect');
+
+
+    var serviceSummary =
+        document.getElementById('serviceSummary');
+
+    var summaryTotal =
+        document.getElementById('summaryTotal');
+
+    var preferredDate =
+        document.getElementById('preferredDate');
+
+    var preferredTime =
+        document.getElementById('preferredTime');
+
+    var serviceAddress =
+        document.getElementById('serviceAddress');
+
+    var serviceNote =
+        document.getElementById('serviceNote');
+
+    var contactName =
+        document.getElementById('contactName');
+
+    var contactPhone =
+        document.getElementById('contactPhone');
+
+    var step2Error =
+        document.getElementById('step2Error');
+
+    var successRequestNumber =
+        document.getElementById('successRequestNumber');
+
+    var successTotal =
+        document.getElementById('successTotal');
 
 
     var btnStepBack =
@@ -1231,9 +1586,6 @@ function e($value)
 
     var btnStepNext =
         document.getElementById('btnStepNext');
-
-    var btnSubmitRequest =
-        document.getElementById('btnSubmitRequest');
 
 
     var currentStep = 1;
@@ -1306,6 +1658,13 @@ function e($value)
                 );
 
             }).join('');
+
+
+        qtyInput.value = '1';
+
+        acUnitTypeSelect.selectedIndex = 0;
+
+        resetStep2Fields();
 
 
         lastFocused =
@@ -1401,18 +1760,26 @@ function e($value)
             });
 
 
-        modal
-            .querySelector('.modal-footer')
-            .classList.toggle(
-                'has-back',
-                n !== 1
-            );
+        var footer =
+            modal.querySelector('.modal-footer');
+
+
+        footer.classList.toggle(
+            'has-back',
+            n === 2
+        );
+
+
+        footer.classList.toggle(
+            'hidden',
+            n === 3
+        );
 
 
         btnStepBack.style.display =
-            n === 1
-                ? 'none'
-                : 'inline-flex';
+            n === 2
+                ? 'inline-flex'
+                : 'none';
 
 
         btnScheduleService.style.display =
@@ -1433,15 +1800,9 @@ function e($value)
                 : 'none';
 
 
-        btnSubmitRequest.style.display =
-            n === 3
-                ? 'inline-flex'
-                : 'none';
+        if (n === 2) {
 
-
-        if (n === 3) {
-
-            renderReview();
+            populateStep2Summary();
 
         }
 
@@ -1453,44 +1814,137 @@ function e($value)
     }
 
 
-    function renderReview() {
+    function parsePrice(priceText) {
 
-        var unitType =
-            acUnitTypeSelect.value;
+        var digits =
+            (priceText || '').replace(/[^\d]/g, '');
+
+
+        return digits
+            ? parseInt(digits, 10)
+            : 0;
+
+    }
+
+
+    function formatPeso(amount) {
+
+        return '\u20B1 ' +
+            amount.toLocaleString('en-PH');
+
+    }
+
+
+    function populateStep2Summary() {
 
         var qty =
-            qtyInput.value;
+            parseInt(qtyInput.value, 10) || 1;
+
+        var unitPrice =
+            parsePrice(currentService.price);
+
+        var total =
+            unitPrice * qty;
 
 
-        reviewBox.innerHTML =
+        serviceSummary.innerHTML =
 
-            '<div class="review-row">' +
+            '<div class="summary-item">' +
                 '<span>Service</span>' +
-                '<strong>' +
-                    currentService.name +
-                '</strong>' +
+                '<strong>' + currentService.name + '</strong>' +
             '</div>' +
 
-            '<div class="review-row">' +
+            '<div class="summary-item">' +
+                '<span>Service Type</span>' +
+                '<strong>' + serviceTypeSelect.value + '</strong>' +
+            '</div>' +
+
+            '<div class="summary-item">' +
                 '<span>AC Unit Type</span>' +
-                '<strong>' +
-                    unitType +
-                '</strong>' +
+                '<strong>' + acUnitTypeSelect.value + '</strong>' +
             '</div>' +
 
-            '<div class="review-row">' +
+            '<div class="summary-item">' +
                 '<span>Number of Units</span>' +
-                '<strong>' +
-                    qty +
-                '</strong>' +
-            '</div>' +
-
-            '<div class="review-row total">' +
-                '<span>Starting from</span>' +
-                '<strong>' +
-                    currentService.price +
-                '</strong>' +
+                '<strong>' + qty + '</strong>' +
             '</div>';
+
+
+        summaryTotal.textContent =
+            formatPeso(total);
+
+    }
+
+
+    function resetStep2Fields() {
+
+        preferredDate.value = '';
+
+        preferredTime.value = '';
+
+        serviceAddress.value = '';
+
+        serviceNote.value = '';
+
+        contactName.value = '';
+
+        contactPhone.value = '';
+
+        step2Error.style.display = 'none';
+
+    }
+
+
+    function generateRequestNumber() {
+
+        var randomPart =
+            Math.floor(
+                Math.random() * 1000000
+            ).toString().padStart(6, '0');
+
+
+        return 'SR-' + randomPart;
+
+    }
+
+
+    function submitRequest() {
+
+        var isValid =
+            preferredDate.value &&
+            preferredTime.value &&
+            serviceAddress.value.trim() &&
+            contactName.value.trim() &&
+            contactPhone.value.trim();
+
+
+        if (!isValid) {
+
+            step2Error.style.display = 'flex';
+
+            return;
+
+        }
+
+
+        step2Error.style.display = 'none';
+
+
+        var qty =
+            parseInt(qtyInput.value, 10) || 1;
+
+        var total =
+            parsePrice(currentService.price) * qty;
+
+
+        successRequestNumber.textContent =
+            generateRequestNumber();
+
+        successTotal.textContent =
+            formatPeso(total);
+
+
+        goToStep(3);
 
     }
 
@@ -1636,7 +2090,7 @@ function e($value)
         'click',
         function () {
 
-            goToStep(3);
+            submitRequest();
 
         }
     );
@@ -1651,22 +2105,6 @@ function e($value)
             alert(
                 currentService.name +
                 ' added to your Service Cart.'
-            );
-
-        }
-    );
-
-
-    btnSubmitRequest.addEventListener(
-        'click',
-        function () {
-
-            closeModal();
-
-            alert(
-                'Your request for ' +
-                currentService.name +
-                ' has been submitted.'
             );
 
         }
