@@ -22,6 +22,7 @@ $pages = [
     'error404' => 'error/error404.php',
     'maintenance' => 'error/maintenance.php',
     'services' => 'main/servicesmain.php',
+    'Myrequest' => 'main/requestpage.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages
