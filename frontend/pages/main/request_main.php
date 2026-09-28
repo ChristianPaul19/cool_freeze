@@ -204,15 +204,17 @@ foreach ($requests as $request) {
                         <input type="search" name="q" placeholder="Search">
                     </form>
 
-                    <button type="button" class="requests-select">
-                        <span class="muted">Sort by:</span> Name (A-Z)
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
+                    <div class="filter-container">
+                        <button type="button" class="requests-select">
+                            <span class="muted">Sort by:</span> Name (A-Z)
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
 
-                    <button type="button" class="requests-select">
-                        All Status
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
+                        <button type="button" class="requests-select">
+                            All Status
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
 
                 </div>
 

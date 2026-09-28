@@ -248,9 +248,9 @@ select {
 
   width: calc(100% - 24px);
 
-  /* margin: auto 12px 15px; */
+  margin: auto 12px 15px;
 
-  padding: 8px 24px;
+  padding: 8px 4px;
 
   border: 0;
 
@@ -258,7 +258,7 @@ select {
 
   color: var(--danger);
 
-  font-size: 14px;
+  font-size: 10px;
 
   font-weight: 600;
 
@@ -266,7 +266,7 @@ select {
 }
 
 .logout i {
-  font-size: 14px;
+  font-size: 11px;
 }
 
 /* =========================================================
@@ -290,7 +290,7 @@ select {
 
   align-items: center;
 
-  justify-content: flex-end;
+  justify-content: space-between;
 
   width: 100%;
 
@@ -388,13 +388,13 @@ select {
 
   align-items: center;
 
+  margin-left: auto;
+
   gap: 12px;
 
   height: 30px;
 
   padding: 0 10px;
-
-  margin-left: auto;
 
   border: 1px solid var(--border);
 
