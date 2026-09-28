@@ -60,7 +60,7 @@ function e($value)
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/servicesmain.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/main.css">
 
     <link
         rel="stylesheet"
