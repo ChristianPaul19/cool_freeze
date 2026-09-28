@@ -1783,7 +1783,7 @@ select {
    MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 420px) {
   .topbar {
     padding: 0 14px;
 
