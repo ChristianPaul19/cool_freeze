@@ -641,6 +641,93 @@ foreach ($requests as $request) {
 
 </div>
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+(function () {
+
+    var menuButton = document.getElementById('menuButton');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('overlay');
+
+
+    function setOpen(open) {
+
+        sidebar.classList.toggle('open', open);
+
+        overlay.classList.toggle('open', open);
+
+        menuButton.setAttribute(
+            'aria-expanded',
+            open ? 'true' : 'false'
+        );
+
+    }
+
+
+    if (menuButton && sidebar && overlay) {
+
+        menuButton.addEventListener('click', function () {
+
+            setOpen(
+                !sidebar.classList.contains('open')
+            );
+
+        });
+
+
+        overlay.addEventListener('click', function () {
+
+            setOpen(false);
+
+        });
+
+
+        sidebar
+            .querySelectorAll('.menu-link')
+            .forEach(function (link) {
+
+                link.addEventListener('click', function () {
+
+                    if (
+                        window.matchMedia(
+                            '(max-width: 900px)'
+                        ).matches
+                    ) {
+
+                        setOpen(false);
+
+                    }
+
+                });
+
+            });
+
+
+        window.addEventListener('resize', function () {
+
+            if (
+                !window.matchMedia(
+                    '(max-width: 900px)'
+                ).matches
+            ) {
+
+                setOpen(false);
+
+            }
+
+        });
+
+    }
+
+})();
+
+
+
+
 
 <script src="<?= BASE_URL ?>frontend/assets/js/custom.js"></script>
 <script>
