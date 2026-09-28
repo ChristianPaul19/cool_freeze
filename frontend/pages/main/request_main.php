@@ -625,7 +625,7 @@ foreach ($requests as $request) {
 
 
 <script src="<?= BASE_URL ?>frontend/assets/js/custom.js"></script>
-<script>
+<script>    
     // Full request detail data, keyed by list index — rendered by PHP above.
     const REQUESTS_DATA = <?= json_encode($requestsForJs, JSON_UNESCAPED_UNICODE) ?>;
 
