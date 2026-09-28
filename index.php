@@ -25,10 +25,11 @@ $pages = [
     'sample' => 'sample.php',
     'request_main' => 'main/request_main.php',
     'cart_main' => 'main/cart_main.php',
+    'profile_main' => 'main/profile_main.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages
-$page = $_GET['page'] ?? 'home_main';
+$page = $_GET['page'] ?? 'profile_main';
 
 if (
     !is_string($page) ||
