@@ -95,7 +95,7 @@ function statusClass($status)
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/dashboardui.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
@@ -196,18 +196,36 @@ function statusClass($status)
         <main class="content">
 
             <!-- WELCOME -->
-            <section class="hero">
+            <div class="page-header">
 
-                <p class="hero-small">Good day,</p>
+                <nav
+                    class="breadcrumb"
+                    aria-label="Breadcrumb"
+                >
 
-                <h1>
+                    <a href="index.php">
+                        Home
+                    </a>
+
+
+                </nav>
+
+
+                <h1 class="page-title">
+
                     Welcome to
                     <span>CoolFreeze!</span>
+
                 </h1>
 
-                <p class="hero-sub">What would you like to do today?</p>
 
-            </section>
+                <p class="page-subtitle">
+
+                    What would you like to do today?
+
+                </p>
+
+            </div>
 
             <!-- SERVICES (full width row) -->
             <section class="panel services-panel">
