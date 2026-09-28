@@ -3741,6 +3741,11 @@ select {
   .schedule-grid-2 {
     grid-template-columns: 1fr 1fr;
   }
+
+  .cart-schedule-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
 }
 
 /* ---------- Sidebar drawer ---------- */
@@ -3789,6 +3794,10 @@ select {
     z-index: 20;
 
     background: rgba(36, 52, 77, 0.4);
+  }
+
+  .cart-layout {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -4013,6 +4022,13 @@ select {
 
   .proof-actions {
     flex-direction: column;
+  }
+  cart-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .cart-item {
+    flex-wrap: wrap;
   }
 }
 
