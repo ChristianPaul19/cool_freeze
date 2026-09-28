@@ -24,10 +24,11 @@ $pages = [
     'services' => 'main/servicesmain.php',
     'sample' => 'sample.php',
     'Myrequest' => 'main/requestpage.php',
+    'profile' => 'profile.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages
-$page = $_GET['page'] ?? 'landing';
+$page = $_GET['page'] ?? 'profile';
 
 if (
     !is_string($page) ||
