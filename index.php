@@ -23,6 +23,7 @@ $pages = [
     'maintenance' => 'error/maintenance.php',
     'services' => 'main/servicesmain.php',
     'sample' => 'sample.php',
+    'Myrequest' => 'main/requestpage.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages

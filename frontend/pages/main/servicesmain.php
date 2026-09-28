@@ -1280,26 +1280,10 @@ function e($value)
 
                     <div class="success-art">
 
-                        <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
-
-                            <circle cx="100" cy="80" r="72" style="fill:var(--lightest-blue);"></circle>
-
-                            <rect x="60" y="40" width="80" height="98" rx="10" style="fill:var(--white);stroke:var(--border);stroke-width:2;"></rect>
-
-                            <rect x="75" y="30" width="50" height="16" rx="6" style="fill:var(--primary);"></rect>
-
-                            <rect x="72" y="58" width="56" height="6" rx="3" style="fill:var(--chip-bg);"></rect>
-                            <rect x="72" y="70" width="56" height="6" rx="3" style="fill:var(--chip-bg);"></rect>
-                            <rect x="72" y="82" width="36" height="6" rx="3" style="fill:var(--chip-bg);"></rect>
-
-                            <circle cx="100" cy="112" r="20" style="fill:var(--green);"></circle>
-
-                            <path
-                                d="M91 112l6 6 12-13"
-                                style="fill:none;stroke:var(--white);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;"
-                            ></path>
-
-                        </svg>
+                        <img class="Comppic"
+                        src="<?= BASE_URL ?>frontend/assets/img/complete.svg"
+                        alt="complete picture"
+                    >
 
                     </div>
 
