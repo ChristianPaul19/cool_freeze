@@ -1871,7 +1871,7 @@ select {
    VERY SMALL MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 420px) {
   .hero h1 {
     font-size: 22px;
   }
