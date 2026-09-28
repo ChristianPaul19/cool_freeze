@@ -1,60 +1,94 @@
 <?php
-/*
- * Sidebar (desktop) + off-canvas menu (mobile) + dark overlay.
- * Needs: $currentPage  (example: 'profile')
- * Optional: $menu. If the page does not define it, the default below is used.
- * TODO: change the file names in $pagesUrl to match your real pages.
- */
-$pagesUrl = BASE_URL . '/frontend/pages/customer/';
 
-$menu = $menu ?? [
-    'Dashboard' => [
-        ['key' => 'home', 'label' => 'Home', 'icon' => 'home', 'url' => $pagesUrl . 'home.php'],
+
+if (!function_exists('e')) {
+    function e($value)
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+    }
+}
+
+$currentPage = $currentPage ?? '';
+
+$sidebarPagesUrl = BASE_URL;
+
+// Single source of truth for the menu. 'key' is matched against $currentPage.
+
+$sidebarMenu = [
+    [
+        'title' => 'Services',
+        'items' => [
+            ['key' => 'services', 'label' => 'Services', 'icon' => 'fa-screwdriver-wrench', 'link' => '?page=services'],
+        ],
     ],
-    'Services' => [
-        ['key' => 'services', 'label' => 'Services', 'icon' => 'services', 'url' => $pagesUrl . 'services.php'],
+    [
+        'title' => 'Cart',
+        'items' => [
+            ['key' => 'cart', 'label' => 'Service Cart', 'icon' => 'fa-cart-shopping', 'link' => 'cart.php'],
+        ],
     ],
-    'Cart' => [
-        ['key' => 'cart', 'label' => 'Service Cart', 'icon' => 'cart', 'url' => $pagesUrl . 'cart.php'],
+    [
+        'title' => 'Service Requests',
+        'items' => [
+            ['key' => 'requests', 'label' => 'My Requests', 'icon' => 'fa-clipboard-list', 'link' => 'requests.php'],
+        ],
     ],
-    'Service Requests' => [
-        ['key' => 'requests', 'label' => 'My Requests', 'icon' => 'requests', 'url' => $pagesUrl . 'requests.php'],
-    ],
-    'System' => [
-        ['key' => 'profile', 'label' => 'Profile', 'icon' => 'user', 'url' => $pagesUrl . 'profile.php'],
-        ['key' => 'help', 'label' => "Helps and FAQ's", 'icon' => 'file', 'url' => $pagesUrl . 'help.php'],
-        ['key' => 'settings', 'label' => 'Settings', 'icon' => 'settings', 'url' => $pagesUrl . 'settings.php'],
+    [
+        'title' => 'System',
+        'items' => [
+            ['key' => 'profile',  'label' => 'Profile',          'icon' => 'fa-user',            'link' => 'profile.php'],
+            ['key' => 'faqs',     'label' => "Helps and FAQ's",  'icon' => 'fa-circle-question', 'link' => 'faqs.php'],
+            ['key' => 'settings', 'label' => 'Settings',         'icon' => 'fa-gear',            'link' => 'settings.php'],
+        ],
     ],
 ];
 ?>
-<aside class="cf-sidebar" id="sidebar" aria-label="Main navigation">
-    <a class="cf-sidebar__logo" href="<?= e($pagesUrl . 'home.php') ?>">
-        <img src="<?= e(BASE_URL . '/frontend/assets/images/coolfreeze_horizontal_logo.svg') ?>" alt="CoolFreeze">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <a href="<?= e($sidebarPagesUrl) ?>?page=landing" class="brand">
+        <img class="imglogo"
+            src="<?= BASE_URL ?>frontend/assets/img/coolfreeze_horizontal_logo.svg"
+            alt="Coolfreeze logo"
+            class="card-img"
+            width="240px"
+        >
     </a>
 
-    <nav class="cf-sidebar__nav">
-        <?php foreach ($menu as $sectionName => $items): ?>
-            <div class="cf-sidebar__section">
-                <p class="cf-sidebar__label"><?= e($sectionName) ?></p>
-                <ul class="cf-sidebar__list">
-                    <?php foreach ($items as $item): ?>
-                        <li>
-                            <a class="cf-sidebar__link<?= $currentPage === $item['key'] ? ' is-active' : '' ?>"
-                               href="<?= e($item['url']) ?>"
-                               <?= $currentPage === $item['key'] ? 'aria-current="page"' : '' ?>>
-                                <?= icon($item['icon']) ?>
-                                <span><?= e($item['label']) ?></span>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
+    <nav class="menu">
+
+        <p class="menu-title">Dashboard</p>
+
+        <a href="<?= e($sidebarPagesUrl) ?>?page=home" class="menu-link <?= $currentPage === 'home' ? 'active' : '' ?>">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+        <?php foreach ($sidebarMenu as $section): ?>
+
+            <p class="menu-title"><?= e($section['title']) ?></p>
+
+            <?php foreach ($section['items'] as $item): ?>
+
+                <a href="<?= e($sidebarPagesUrl . $item['link']) ?>"
+                   class="menu-link <?= $currentPage === $item['key'] ? 'active' : '' ?>">
+                    <i class="fa-solid <?= e($item['icon']) ?>"></i>
+                    <?= e($item['label']) ?>
+                </a>
+
+            <?php endforeach; ?>
+
         <?php endforeach; ?>
+
     </nav>
 
-    <!-- Uses your existing logout endpoint. -->
-    <form class="cf-sidebar__logout" method="post" action="<?= e(BASE_URL . '/backend/api/logout.php') ?>">
-        <button type="submit"><?= icon('logout') ?><span>Logout</span></button>
+    <!-- LOGOUT -->
+    <form action="<?= BASE_URL ?>backend/api/logout.php" method="POST" class="logout-form">
+        <button type="submit" class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Log out
+        </button>
     </form>
+
 </aside>
-<div class="cf-overlay" id="sidebarOverlay"></div>
