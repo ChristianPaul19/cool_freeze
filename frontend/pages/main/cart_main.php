@@ -47,7 +47,7 @@ foreach ($cartItems as $item) {
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/main.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>frontend/assets/css/cart_main.css">
 
     <link
         rel="stylesheet"

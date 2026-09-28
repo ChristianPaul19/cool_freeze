@@ -294,8 +294,7 @@ select {
 
   width: 100%;
 
-  height: 58px;
-
+  height: 44px;
   flex: 0 0 44px;
 
   padding: 0 16px;
@@ -391,11 +390,11 @@ select {
 
   margin-left: auto;
 
-  gap: 20px;
+  gap: 12px;
 
-  height: 44px;
+  height: 30px;
 
-  padding: 0 15px;
+  padding: 0 10px;
 
   border: 1px solid var(--border);
 
@@ -413,7 +412,7 @@ select {
 
   color: var(--muted);
 
-  font-size: 17px;
+  font-size: 11px;
 }
 
 .icon-link:hover {
@@ -431,7 +430,7 @@ select {
 
   border-left: 1px solid var(--border);
 
-  font-size: 14px;
+  font-size: 10px;
 
   font-weight: 700;
 }
@@ -439,7 +438,7 @@ select {
 .profile-link i {
   color: var(--muted);
 
-  font-size: 17px;
+  font-size: 10px;
 }
 
 /* =========================================================
@@ -2315,13 +2314,16 @@ select {
 
   align-items: center;
 
-  margin-bottom: 12px;
+  gap: 9px;
 
-  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .requests-toolbar .search {
-  width: 500px;
+  flex: 1;
+
+  width: auto;
+
   max-width: none;
 }
 
@@ -2361,11 +2363,6 @@ select {
   font-size: 8px;
 
   color: var(--muted);
-}
-
-.filter-container {
-  display: flex;
-  gap: 10px;
 }
 
 /* =========================================================
@@ -3741,11 +3738,6 @@ select {
   .schedule-grid-2 {
     grid-template-columns: 1fr 1fr;
   }
-
-  .cart-schedule-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
 }
 
 /* ---------- Sidebar drawer ---------- */
@@ -3794,10 +3786,6 @@ select {
     z-index: 20;
 
     background: rgba(36, 52, 77, 0.4);
-  }
-
-  .cart-layout {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -4022,13 +4010,6 @@ select {
 
   .proof-actions {
     flex-direction: column;
-  }
-  cart-schedule-grid {
-    grid-template-columns: 1fr;
-  }
- 
-  .cart-item {
-    flex-wrap: wrap;
   }
 }
 
