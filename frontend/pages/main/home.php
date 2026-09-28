@@ -1,5 +1,7 @@
 <?php
 
+
+// Start here. Change 
 require_once dirname(__DIR__, 3) . '/backend/bootstrap.php';
 
 // Log in name ng customer: example - markesg
@@ -36,6 +38,7 @@ $menu = [
         ]
     ],
 ];
+// change end
 
 // Services 
 $services = [
@@ -65,10 +68,13 @@ $careTips = [
 ];
 
 
+// change
 function e($value)
 {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 }
+// end
+
 
 // Turn a status label into a CSS class suffix, e.g. "On going" -> "ongoing"
 function statusClass($status)
@@ -98,6 +104,7 @@ function statusClass($status)
 
 <div class="layout">
 
+<!-- Change start -->
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
 
@@ -143,6 +150,7 @@ function statusClass($status)
         </form>
 
     </aside>
+    <!-- change end -->
 
     <!-- MOBILE OVERLAY -->
     <div class="overlay" id="overlay"></div>

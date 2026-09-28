@@ -81,7 +81,7 @@ function e($value)
         
         <img class="imglogo"
                         src="<?= BASE_URL ?>frontend/assets/img/coolfreeze_horizontal_logo.svg"
-                        alt="Bright living room with a grey sofa"
+                        alt="Coolfreeze logo"
                         class="card-img"
                     >
         <nav class="menu">
