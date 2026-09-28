@@ -11,7 +11,7 @@ if (MAINTENANCE_MODE && APP_ENV !== 'local') {
 }
 
 $pages = [
-    'home' => 'main/home.php',
+    'home_main' => 'main/home_main.php',
     'landing' => 'landing.php',
     'login' => 'auth/login.php',
     'register' => 'auth/register.php',
@@ -21,13 +21,13 @@ $pages = [
     'set_password' => 'auth/set_password.php',
     'error404' => 'error/error404.php',
     'maintenance' => 'error/maintenance.php',
-    'services' => 'main/servicesmain.php',
+    'services_main' => 'main/services_main.php',
     'sample' => 'sample.php',
-    'Myrequest' => 'main/requestpage.php',
+    'request_main' => 'main/request_main.php',
 ];
 
 //                        change this 'register'. pick the page in the $pages
-$page = $_GET['page'] ?? 'landing';
+$page = $_GET['page'] ?? 'home_main';
 
 if (
     !is_string($page) ||
