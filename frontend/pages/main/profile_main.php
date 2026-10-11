@@ -447,6 +447,8 @@ $phoneText    = $user['phone']     !== '' ? $user['phone'] : 'Not set';
      JAVASCRIPT
 ========================================================= -->
   <script src="<?= BASE_URL ?>frontend/assets/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?= BASE_URL ?>frontend/assets/js/alerts.js"></script>
   <script>
   /* ---------- Mobile sidebar ---------- */
   (function() {
@@ -774,7 +776,7 @@ $phoneText    = $user['phone']     !== '' ? $user['phone'] : 'Not set';
           return;
         }
         closePasswordModal();
-        alert('Password updated.');
+        cfAlert.toast('success', 'Password updated');
       });
     });
 

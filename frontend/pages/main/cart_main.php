@@ -468,6 +468,8 @@ foreach ($cartItems as $item) {
      JAVASCRIPT
 ========================================================= -->
   <script src="<?= BASE_URL ?>frontend/assets/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?= BASE_URL ?>frontend/assets/js/alerts.js"></script>
   <script>
   /* ---------- Sidebar (same as services page) ---------- */
 
@@ -571,24 +573,59 @@ foreach ($cartItems as $item) {
 
     /* remove item */
 
+    // cartList.addEventListener('click', function(e) {
+    //   var btn = e.target.closest('.btn-remove');
+    //   if (!btn) {
+    //     return;
+    //   }
+    //   var row = btn.closest('.cart-item');
+    //   btn.disabled = true;
+    //   cfPost(API_URL + 'cart.php', {
+    //     action: 'remove',
+    //     cart_item_id: row.getAttribute('data-id')
+    //   }).then(function(res) {
+    //     btn.disabled = false;
+    //     if (!res.success) {
+    //       // alert(cfFirstError(res)); 
+    //       cfAlert.error(cfFirstError(res))
+    //       return;
+    //     }
+    //     row.remove();
+    //     refreshCart();
+    //   });
+    // });
+
     cartList.addEventListener('click', function(e) {
       var btn = e.target.closest('.btn-remove');
       if (!btn) {
         return;
       }
       var row = btn.closest('.cart-item');
-      btn.disabled = true;
-      cfPost(API_URL + 'cart.php', {
-        action: 'remove',
-        cart_item_id: row.getAttribute('data-id')
-      }).then(function(res) {
-        btn.disabled = false;
-        if (!res.success) {
-          alert(cfFirstError(res));
+      cfAlert.confirm({
+        icon: 'warning',
+        title: 'Remove this service?',
+        text: 'It will be removed from your Service Cart.',
+        confirmText: 'Yes, remove it',
+        cancelText: 'Keep it',
+        danger: true
+      }).then(function(ok) {
+        if (!ok) {
           return;
         }
-        row.remove();
-        refreshCart();
+        btn.disabled = true;
+        cfPost(API_URL + 'cart.php', {
+          action: 'remove',
+          cart_item_id: row.getAttribute('data-id')
+        }).then(function(res) {
+          btn.disabled = false;
+          if (!res.success) {
+            cfAlert.error(cfFirstError(res));
+            return;
+          }
+          row.remove();
+          refreshCart();
+          cfAlert.toast('success', 'Item removed');
+        });
       });
     });
 

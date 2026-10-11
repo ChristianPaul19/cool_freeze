@@ -553,6 +553,8 @@ foreach ($requests as $request) {
 
   <script src="<?= BASE_URL ?>frontend/assets/js/custom.js"></script>
   <script src="<?= BASE_URL ?>frontend/assets/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?= BASE_URL ?>frontend/assets/js/alerts.js"></script>
   <script>
   // Full request detail data, keyed by list index — rendered by PHP above.
   const REQUESTS_DATA = <?= json_encode($requestsForJs, JSON_UNESCAPED_UNICODE) ?>;
@@ -693,35 +695,42 @@ foreach ($requests as $request) {
 
     // -------------------- Cancel request (Pending only) --------------------
     var cancelBtn = document.getElementById('detailCancelBtn');
-
     if (cancelBtn) {
       cancelBtn.addEventListener('click', function() {
         if (!currentRequest) {
           return;
         }
-
-        if (!confirm('Cancel ' + currentRequest.requestId + '? This cannot be undone.')) {
-          return;
-        }
-
-        cfPost('<?= BASE_URL ?>backend/api/requests.php', {
-          action: 'cancel',
-          request_id: currentRequest.id
-        }).then(function(res) {
-          if (!res.success) {
-            alert(cfFirstError(res));
+        cfAlert.confirm({
+          icon: 'warning',
+          title: 'Cancel ' + currentRequest.requestId + '?',
+          text: 'This cannot be undone.',
+          confirmText: 'Yes, cancel request',
+          cancelText: 'Keep request',
+          danger: true
+        }).then(function(ok) {
+          if (!ok) {
             return;
           }
-          var row = list.querySelector('[data-request-id="' + currentRequest.id + '"]');
-          if (row) {
-            var rowBadge = row.querySelector('.badge');
-            rowBadge.className = 'badge cancelled';
-            rowBadge.textContent = 'Cancelled';
-          }
-          currentRequest.statusLabel = 'Cancelled';
-          currentRequest.statusDetail = 'Cancelled';
-          currentRequest.statusClass = 'cancelled';
-          closeDetail();
+          cfPost('<?= BASE_URL ?>backend/api/requests.php', {
+            action: 'cancel',
+            request_id: currentRequest.id
+          }).then(function(res) {
+            if (!res.success) {
+              cfAlert.error(cfFirstError(res));
+              return;
+            }
+            var row = list.querySelector('[data-request-id="' + currentRequest.id + '"]');
+            if (row) {
+              var rowBadge = row.querySelector('.badge');
+              rowBadge.className = 'badge cancelled';
+              rowBadge.textContent = 'Cancelled';
+            }
+            currentRequest.statusLabel = 'Cancelled';
+            currentRequest.statusDetail = 'Cancelled';
+            currentRequest.statusClass = 'cancelled';
+            closeDetail();
+            cfAlert.toast('success', res.message);
+          });
         });
       });
     }
