@@ -664,6 +664,8 @@ function e($value) {
      JAVASCRIPT
 ========================================================= -->
   <script src="<?= BASE_URL ?>frontend/assets/js/api.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="<?= BASE_URL ?>frontend/assets/js/alerts.js"></script>
   <script>
   (function() {
 
@@ -1309,8 +1311,9 @@ function e($value) {
 
     btnScheduleService.addEventListener('click', function() {
       if (!serviceTypeSelect.value) {
-        alert('Please choose Residential or Commercial.');
-        serviceTypeSelect.focus();
+        cfAlert.warning('Please choose Residential or Commercial.', 'Service type needed').then(function() {
+          serviceTypeSelect.focus();
+        });
         return;
       }
       goToStep(2);
@@ -1344,8 +1347,9 @@ function e($value) {
 
     btnAddCart.addEventListener('click', function() {
       if (!serviceTypeSelect.value) {
-        alert('Please choose Residential or Commercial.');
-        serviceTypeSelect.focus();
+        cfAlert.warning('Please choose Residential or Commercial.', 'Service type needed').then(function() {
+          serviceTypeSelect.focus();
+        });
         return;
       }
       btnAddCart.disabled = true;
@@ -1358,11 +1362,22 @@ function e($value) {
       }).then(function(res) {
         btnAddCart.disabled = false;
         if (!res.success) {
-          alert(cfFirstError(res));
+          cfAlert.error(cfFirstError(res));
           return;
         }
+        var addedName = currentService.name;
         closeModal();
-        alert(currentService.name + ' added to your Service Cart.');
+        cfAlert.confirm({
+          icon: 'success',
+          title: 'Added to cart',
+          text: addedName + ' was added to your Service Cart.',
+          confirmText: 'View cart',
+          cancelText: 'Keep browsing'
+        }).then(function(goToCart) {
+          if (goToCart) {
+            window.location.href = '<?= BASE_URL ?>?page=cart_main';
+          }
+        });
       });
     });
 
