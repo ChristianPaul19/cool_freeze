@@ -1,9 +1,7 @@
 <?php
-
 require_once dirname(__DIR__, 3) . '/backend/bootstrap.php';
 
 $userName = $_SESSION['username'] ?? 'Customer';
-
 $currentPage = 'cart';
 
 function e($value)
@@ -13,23 +11,33 @@ function e($value)
 
 require_once BACKEND_PATH . '/helpers/guard.php';
 require_once BACKEND_PATH . '/models/customer.php';
+require_once BACKEND_PATH . '/models/service.php';
 require_once BACKEND_PATH . '/models/cart.php';
 
 $customerId = (int) $_SESSION['customer_id'];
 $customer   = customer_find($conn, $customerId);
+$unitTypes  = unit_type_all_active($conn);
 
 $cartItems = array_map(function ($i) {
     return [
-        'id'    => (int) $i['cart_item_id'],
-        'name'  => $i['service_name'],
-        'unit'  => $i['unit_type_name'] . ' · ' . $i['customer_type'],
-        'qty'   => (int) $i['quantity'],
-        'price' => round((float) $i['unit_price']),
+        'id'            => (int) $i['cart_item_id'],
+        'service_id'    => (int) $i['service_id'],
+        'name'          => $i['service_name'],
+        'unit'          => $i['unit_type_name'] . ' · ' . $i['customer_type'],
+        'unit_type_id'  => (int) $i['unit_type_id'],
+        'customer_type' => $i['customer_type'],
+        'qty'           => (int) $i['quantity'],
+        'price'         => round((float) $i['unit_price']),
     ];
 }, cart_get($conn, $customerId));
 
-$cartTotal = 0;
+// Name + "includes" list per service, for the edit modal
+$serviceInfo = [];
+foreach (service_all_active($conn) as $s) {
+    $serviceInfo[(int) $s['service_id']] = ['name' => $s['name'], 'inclusions' => $s['inclusions']];
+}
 
+$cartTotal = 0;
 foreach ($cartItems as $item) {
     $cartTotal += $item['price'] * $item['qty'];
 }
@@ -105,36 +113,32 @@ foreach ($cartItems as $item) {
 
               <?php foreach ($cartItems as $item): ?>
 
+              <!-- changes -->
               <article class="cart-item" data-name="<?= e($item['name']) ?>" data-unit="<?= e($item['unit']) ?>"
                 data-qty="<?= (int) $item['qty'] ?>" data-price="<?= (int) $item['price'] ?>"
-                data-id="<?= (int) $item['id'] ?>">
-
+                data-id="<?= (int) $item['id'] ?>" data-unit-type-id="<?= (int) $item['unit_type_id'] ?>"
+                data-customer-type="<?= e($item['customer_type']) ?>"
+                data-service-id="<?= (int) $item['service_id'] ?>">
                 <div class="cart-item-icon">
                   <img src="<?= BASE_URL ?>frontend/assets/img/aircon.svg" alt="">
                 </div>
-
                 <div class="cart-item-info">
                   <h3><?= e($item['name']) ?></h3>
-                  <p><?= e($item['unit']) ?></p>
+                  <p><?= e($item['unit']) ?><?= $item['qty'] > 1 ? ' · ' . (int) $item['qty'] . ' units' : '' ?></p>
                 </div>
-
                 <span class="cart-item-price">
                   ₱ <?= number_format($item['price'] * $item['qty']) ?>
                 </span>
-
                 <div class="cart-item-actions">
-
-                  <a href="<?= BASE_URL ?>?page=services_main" class="icon-btn" aria-label="Edit">
+                  <button type="button" class="icon-btn btn-edit" aria-label="Edit">
                     <i class="fa-solid fa-pen"></i>
-                  </a>
-
+                  </button>
                   <button type="button" class="icon-btn danger btn-remove" aria-label="Remove">
                     <i class="fa-regular fa-trash-can"></i>
                   </button>
-
                 </div>
-
               </article>
+              <!-- // -->
 
               <?php endforeach; ?>
 
@@ -463,6 +467,83 @@ foreach ($cartItems as $item) {
 
   </div>
 
+  <!-- =========================================================
+     EDIT ITEM MODAL (same look as the Services page modal)
+========================================================= -->
+  <div class="modal-overlay" id="editModalOverlay">
+    <div class="modal" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+      <div class="modal-scroll">
+        <button type="button" class="modal-close" id="editCloseBtn" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <button type="button" class="modal-back" id="editBackBtn">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to Cart
+        </button>
+
+        <h2 class="modal-title" id="editModalTitle">
+          Edit
+          <span>Service</span>
+        </h2>
+
+        <p class="modal-subtitle">
+          Update the details of this service in your cart
+        </p>
+
+        <div class="panel-grid">
+          <div class="form-col">
+            <h3 class="form-heading">Service Information</h3>
+
+            <label class="field">
+              <span>Service Type</span>
+              <select id="editCustomerType">
+                <option value="Residential">Residential</option>
+                <option value="Commercial">Commercial</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>AC Unit Type</span>
+              <select id="editUnitType">
+                <?php foreach ($unitTypes as $u): ?>
+                <option value="<?= (int) $u['unit_type_id'] ?>"><?= e($u['name']) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </label>
+
+            <div class="field">
+              <span>Number of Units</span>
+              <div class="qty">
+                <button type="button" class="qty-btn" data-action="dec" aria-label="Decrease">&minus;</button>
+                <input type="text" class="qty-input" id="editQty" value="1" inputmode="numeric" readonly>
+                <button type="button" class="qty-btn" data-action="inc" aria-label="Increase">&plus;</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-col">
+            <div class="info-art">
+              <img class="modalpic" src="<?= BASE_URL ?>frontend/assets/img/aircon.svg" alt="">
+            </div>
+
+            <div class="includes-box">
+              <p class="includes-title" id="editIncludesTitle">Service Includes:</p>
+              <ul class="includes-list" id="editIncludesList"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="footer-actions">
+          <button type="button" class="btn-outline" id="editCancelBtn">Cancel</button>
+          <button type="button" class="btn-primary" id="editSaveBtn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- =========================================================
      JAVASCRIPT
@@ -569,6 +650,157 @@ foreach ($cartItems as $item) {
       cartTotalEl.textContent = formatPeso(getTotal());
       cartList.classList.toggle('is-empty', getItems().length === 0);
     }
+
+    //changes
+    var IMG_URL = '<?= BASE_URL ?>frontend/assets/img/';
+    var MAX_QTY = 99;
+
+    function escAttr(text) {
+      return esc(text).replace(/"/g, '&quot;');
+    }
+
+    // Same markup as the PHP loop, used to redraw the list after an edit
+    function renderRow(i) {
+      var price = Math.round(parseFloat(i.unit_price));
+      var qty = parseInt(i.quantity, 10);
+      var unit = i.unit_type_name + ' \u00B7 ' + i.customer_type;
+      var unitsText = qty > 1 ? ' \u00B7 ' + qty + ' units' : '';
+      return '<article class="cart-item"' +
+        ' data-name="' + escAttr(i.service_name) + '"' +
+        ' data-unit="' + escAttr(unit) + '"' +
+        ' data-qty="' + qty + '"' +
+        ' data-price="' + price + '"' +
+        ' data-id="' + parseInt(i.cart_item_id, 10) + '"' +
+        ' data-unit-type-id="' + parseInt(i.unit_type_id, 10) + '"' +
+        ' data-service-id="' + parseInt(i.service_id, 10) + '"' +
+        ' data-customer-type="' + escAttr(i.customer_type) + '">' +
+        '<div class="cart-item-icon"><img src="' + IMG_URL + 'aircon.svg" alt=""></div>' +
+        '<div class="cart-item-info"><h3>' + esc(i.service_name) + '</h3><p>' + esc(unit + unitsText) + '</p></div>' +
+        '<span class="cart-item-price">\u20B1 ' + (price * qty).toLocaleString('en-PH') + '</span>' +
+        '<div class="cart-item-actions">' +
+        '<button type="button" class="icon-btn btn-edit" aria-label="Edit"><i class="fa-solid fa-pen"></i></button>' +
+        '<button type="button" class="icon-btn danger btn-remove" aria-label="Remove"><i class="fa-regular fa-trash-can"></i></button>' +
+        '</div></article>';
+    }
+
+    function renderCart(items) {
+      cartList.querySelectorAll('.cart-item').forEach(function(el) {
+        el.remove();
+      });
+      cartList.insertAdjacentHTML('afterbegin', items.map(renderRow).join(''));
+      refreshCart();
+    }
+
+    // changes
+    /* edit item (modal, same look as the Services page) */
+    var SERVICE_INFO = <?= json_encode($serviceInfo, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
+    var editOverlay = document.getElementById('editModalOverlay');
+    var editModal = document.getElementById('editModal');
+    var editTitle = document.getElementById('editModalTitle');
+    var editCustomerType = document.getElementById('editCustomerType');
+    var editUnitType = document.getElementById('editUnitType');
+    var editQty = document.getElementById('editQty');
+    var editIncludesTitle = document.getElementById('editIncludesTitle');
+    var editIncludesList = document.getElementById('editIncludesList');
+    var editSaveBtn = document.getElementById('editSaveBtn');
+    var editLastFocused = null;
+    var editing = null; // the cart line being edited
+
+    function openEdit(row) {
+      var info = SERVICE_INFO[row.getAttribute('data-service-id')] || {
+        name: row.getAttribute('data-name'),
+        inclusions: []
+      };
+
+      editing = {
+        id: row.getAttribute('data-id'),
+        typeId: row.getAttribute('data-unit-type-id'),
+        custType: row.getAttribute('data-customer-type'),
+        qty: parseInt(row.getAttribute('data-qty'), 10) || 1
+      };
+
+      editTitle.innerHTML = 'Edit <span>' + esc(info.name) + '</span>';
+      editIncludesTitle.textContent = info.name + ' Includes:';
+      editIncludesList.innerHTML = info.inclusions.map(function(item) {
+        return '<li><i class="fa-solid fa-circle-check"></i>' + esc(item) + '</li>';
+      }).join('');
+
+      editCustomerType.value = editing.custType;
+      editUnitType.value = editing.typeId;
+      editQty.value = String(editing.qty);
+
+      editLastFocused = document.activeElement;
+      editOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('editCloseBtn').focus();
+    }
+
+    function closeEdit() {
+      editOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      if (editLastFocused) {
+        editLastFocused.focus();
+      }
+    }
+
+    cartList.addEventListener('click', function(e) {
+      var btn = e.target.closest('.btn-edit');
+      if (!btn) {
+        return;
+      }
+      openEdit(btn.closest('.cart-item'));
+    });
+
+    editModal.querySelectorAll('.qty-btn').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var val = parseInt(editQty.value, 10) || 1;
+        val = b.getAttribute('data-action') === 'inc' ? Math.min(MAX_QTY, val + 1) : Math.max(1, val - 1);
+        editQty.value = String(val);
+      });
+    });
+
+    document.getElementById('editCloseBtn').addEventListener('click', closeEdit);
+    document.getElementById('editBackBtn').addEventListener('click', closeEdit);
+    document.getElementById('editCancelBtn').addEventListener('click', closeEdit);
+    editOverlay.addEventListener('click', function(e) {
+      if (e.target === editOverlay) {
+        closeEdit();
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && editOverlay.classList.contains('open')) {
+        closeEdit();
+      }
+    });
+
+    editSaveBtn.addEventListener('click', function() {
+      var qty = parseInt(editQty.value, 10) || 1;
+
+      if (editCustomerType.value === editing.custType && editUnitType.value === editing.typeId && qty === editing
+        .qty) {
+        closeEdit(); // nothing changed
+        return;
+      }
+
+      editSaveBtn.disabled = true;
+      cfPost(API_URL + 'cart.php', {
+        action: 'edit',
+        cart_item_id: editing.id,
+        customer_type: editCustomerType.value,
+        unit_type_id: editUnitType.value,
+        quantity: qty
+      }).then(function(res) {
+        editSaveBtn.disabled = false;
+        if (!res.success) {
+          cfAlert.error(cfFirstError(res));
+          return;
+        }
+        renderCart(res.items);
+        closeEdit();
+        cfAlert.toast('success', 'Cart updated');
+      });
+    });
+    //
 
 
     /* remove item */

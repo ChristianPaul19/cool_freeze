@@ -24,22 +24,6 @@ $user = [
     'profile_image' => !empty($row['profile_image']) ? BASE_URL . $row['profile_image'] : $defaultAvatar,
 ];
 
-$supportUrl = 'mailto:support@coolfreeze.com';
-
-// Sample answers. Change the wording to match your own system.
-$faqs = [
-    ['q' => 'How do I request a service?',
-     'a' => 'Open Services, choose the service you need, add it to your Service Cart, then submit your request from the cart.'],
-    ['q' => 'How can I check my request status?',
-     'a' => 'Go to My Requests to see every request you sent and its current status.'],
-    ['q' => 'Can I cancel my service request?',
-     'a' => 'Yes. Open My Requests and cancel the request before a technician has been assigned.'],
-    ['q' => 'How is the service cost determined?',
-     'a' => 'The cost depends on the type of service and the unit being serviced. The final price is confirmed before work begins.'],
-    ['q' => 'How do I contact CoolFreeze?',
-     'a' => 'Use the Contact Support button below and our team will get back to you.'],
-];
-
 // Values shown on the page ("Not set" when empty)
 $userName     = $user['username'];   // used by topbar.php
 $currentPage  = 'profile';           // used by sidebar.php
@@ -247,41 +231,6 @@ $phoneText    = $user['phone']     !== '' ? $user['phone'] : 'Not set';
                   <form method="post" action="<?= BASE_URL ?>backend/api/logout.php">
                     <button type="submit" class="btn-primary pf-btn-danger">Log out</button>
                   </form>
-                </div>
-
-              </div>
-
-            </section>
-
-            <!-- FAQS -->
-            <section class="pf-section">
-
-              <div class="panel-head">
-                <h2 class="panel-title">
-                  <i class="fa-regular fa-circle-question"></i>
-                  FAQs
-                </h2>
-              </div>
-
-              <div class="pf-card pf-fields">
-
-                <?php foreach ($faqs as $i => $faq): ?>
-
-                <div class="pf-faq">
-
-                  <button type="button" class="pf-faq-q" aria-expanded="false" aria-controls="faq<?= (int) $i ?>">
-                    <span><?= e($faq['q']) ?></span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                  </button>
-
-                  <p class="pf-faq-a" id="faq<?= (int) $i ?>" hidden><?= e($faq['a']) ?></p>
-
-                </div>
-
-                <?php endforeach; ?>
-
-                <div class="pf-faq-footer">
-                  <a class="btn-primary" href="<?= e($supportUrl) ?>">Contact Support</a>
                 </div>
 
               </div>
@@ -674,24 +623,6 @@ $phoneText    = $user['phone']     !== '' ? $user['phone'] : 'Not set';
         closeEdit();
       });
     })
-
-
-    /* ----- FAQ accordion ----- */
-
-    document.querySelectorAll('.pf-faq-q').forEach(function(btn) {
-
-      btn.addEventListener('click', function() {
-
-        var answer = document.getElementById(btn.getAttribute('aria-controls'));
-        var open = btn.getAttribute('aria-expanded') === 'true';
-
-        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-        answer.hidden = open;
-
-      });
-
-    });
-
 
     /* ----- Change password modal ----- */
 

@@ -37,8 +37,7 @@ $sidebarMenu = [
         'title' => 'System',
         'items' => [
             ['key' => 'profile',  'label' => 'Profile',          'icon' => 'fa-user',            'link' => '?page=profile_main'],
-            ['key' => 'faqs',     'label' => "Helps and FAQ's",  'icon' => 'fa-circle-question', 'link' => 'faqs.php'],
-            ['key' => 'settings', 'label' => 'Settings',         'icon' => 'fa-gear',            'link' => 'settings.php'],
+            ['key' => 'faqs',     'label' => "Helps and FAQ's",  'icon' => 'fa-circle-question', 'link' => '?page=faq_main'],
         ],
     ],
 ];
@@ -47,49 +46,46 @@ $sidebarMenu = [
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
-    <a href="<?= e($sidebarPagesUrl) ?>?page=landing" class="brand">
-        <img class="imglogo"
-            src="<?= BASE_URL ?>frontend/assets/img/coolfreeze_horizontal_logo.svg"
-            alt="Coolfreeze logo"
-            class="card-img"
-            width="240px"
-        >
+  <a href="<?= e($sidebarPagesUrl) ?>?page=landing" class="brand">
+    <img class="imglogo" src="<?= BASE_URL ?>frontend/assets/img/coolfreeze_horizontal_logo.svg" alt="Coolfreeze logo"
+      class="card-img" width="240px">
+  </a>
+
+  <nav class="menu">
+
+    <p class="menu-title">Dashboard</p>
+
+    <a href="<?= e($sidebarPagesUrl) ?>?page=home_main"
+      class="menu-link <?= $currentPage === 'home' ? 'active' : '' ?>">
+      <i class="fa-solid fa-house"></i>
+      Home
     </a>
 
-    <nav class="menu">
+    <?php foreach ($sidebarMenu as $section): ?>
 
-        <p class="menu-title">Dashboard</p>
+    <p class="menu-title"><?= e($section['title']) ?></p>
 
-        <a href="<?= e($sidebarPagesUrl) ?>?page=home_main" class="menu-link <?= $currentPage === 'home' ? 'active' : '' ?>">
-            <i class="fa-solid fa-house"></i>
-            Home
-        </a>
+    <?php foreach ($section['items'] as $item): ?>
 
-        <?php foreach ($sidebarMenu as $section): ?>
+    <a href="<?= e($sidebarPagesUrl . $item['link']) ?>"
+      class="menu-link <?= $currentPage === $item['key'] ? 'active' : '' ?>">
+      <i class="fa-solid <?= e($item['icon']) ?>"></i>
+      <?= e($item['label']) ?>
+    </a>
 
-            <p class="menu-title"><?= e($section['title']) ?></p>
+    <?php endforeach; ?>
 
-            <?php foreach ($section['items'] as $item): ?>
+    <?php endforeach; ?>
 
-                <a href="<?= e($sidebarPagesUrl . $item['link']) ?>"
-                   class="menu-link <?= $currentPage === $item['key'] ? 'active' : '' ?>">
-                    <i class="fa-solid <?= e($item['icon']) ?>"></i>
-                    <?= e($item['label']) ?>
-                </a>
+  </nav>
 
-            <?php endforeach; ?>
-
-        <?php endforeach; ?>
-
-    </nav>
-
-    <!-- LOGOUT -->
-    <form action="<?= BASE_URL ?>backend/api/logout.php" method="POST" class="logout-form">
-        <button type="submit" class="logout">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Log out
-        </button>
-    </form>
+  <!-- LOGOUT -->
+  <form action="<?= BASE_URL ?>backend/api/logout.php" method="POST" class="logout-form">
+    <button type="submit" class="logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Log out
+    </button>
+  </form>
 
 
 </aside>

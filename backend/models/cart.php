@@ -93,3 +93,71 @@ function cart_clear(mysqli $conn, int $customerId): void {
     $stmt->execute();
     $stmt->close();
 }
+
+// changes
+
+// Changes one cart line. If the new choice matches ANOTHER line in the same cart, they are merged.
+// Returns false if the line doesn't exist or belongs to someone else.
+function cart_edit_item(
+    mysqli $conn, int $customerId, int $cartItemId, int $unitTypeId, string $customerType, int $quantity
+): bool {
+    $quantity = max(1, min(CART_MAX_QTY, $quantity));
+
+    $conn->begin_transaction();
+    try {
+        $stmt = $conn->prepare(
+            'SELECT service_id FROM cart_items WHERE cart_item_id = ? AND customer_id = ? LIMIT 1 FOR UPDATE'
+        );
+        $stmt->bind_param('ii', $cartItemId, $customerId);
+        $stmt->execute();
+        $line = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        if (!$line) {
+            $conn->rollback();
+            return false;
+        }
+        $serviceId = (int) $line['service_id'];
+
+        $stmt = $conn->prepare(
+            'SELECT cart_item_id, quantity FROM cart_items
+             WHERE customer_id = ? AND service_id = ? AND unit_type_id = ? AND customer_type = ?
+               AND cart_item_id <> ? LIMIT 1'
+        );
+        $stmt->bind_param('iiisi', $customerId, $serviceId, $unitTypeId, $customerType, $cartItemId);
+        $stmt->execute();
+        $other = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        if ($other) {
+            // Same choice already in the cart: add the quantities together, drop the edited line
+            $otherId = (int) $other['cart_item_id'];
+            $merged  = min(CART_MAX_QTY, (int) $other['quantity'] + $quantity);
+
+            $stmt = $conn->prepare('UPDATE cart_items SET quantity = ? WHERE cart_item_id = ?');
+            $stmt->bind_param('ii', $merged, $otherId);
+            $stmt->execute();
+            $stmt->close();
+
+            $stmt = $conn->prepare('DELETE FROM cart_items WHERE cart_item_id = ? AND customer_id = ?');
+            $stmt->bind_param('ii', $cartItemId, $customerId);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            $stmt = $conn->prepare(
+                'UPDATE cart_items SET unit_type_id = ?, customer_type = ?, quantity = ?
+                 WHERE cart_item_id = ? AND customer_id = ?'
+            );
+            $stmt->bind_param('isiii', $unitTypeId, $customerType, $quantity, $cartItemId, $customerId);
+            $stmt->execute();
+            $stmt->close();
+        }
+
+        $conn->commit();
+        return true;
+    } catch (Throwable $e) {
+        $conn->rollback();
+        throw $e;
+    }
+}
+//

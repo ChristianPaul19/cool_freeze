@@ -668,7 +668,7 @@ span {
 #sitefooter {
   width: 100%;
   box-sizing: border-box;
-  background: var(--header-color);
+  background: var(--blue-primary);
   color: #cbd5e1;
   padding: 0 var(--side-padding);
 }

@@ -66,6 +66,34 @@ try {
             require_method('POST');
             cart_clear($conn, $customerId);
             cart_response($conn, $customerId, 'Cart cleared.');
+        
+        // Changes
+        case 'edit':
+            require_method('POST');
+            $cartItemId   = (int) post_str('cart_item_id');
+            $unitTypeId   = (int) post_str('unit_type_id');
+            $customerType = post_str('customer_type');
+            $quantity     = (int) post_str('quantity');
+
+            $errors = [];
+            if (!unit_type_find($conn, $unitTypeId)) {
+                $errors['unit_type_id'] = 'Choose an AC unit type.';
+            }
+            if (!in_array($customerType, ['Residential', 'Commercial'], true)) {
+                $errors['customer_type'] = 'Choose Residential or Commercial.';
+            }
+            if ($quantity < 1 || $quantity > CART_MAX_QTY) {
+                $errors['quantity'] = 'Number of units must be between 1 and ' . CART_MAX_QTY . '.';
+            }
+            if ($errors) {
+                respond(['success' => false, 'errors' => $errors], 422);
+            }
+
+            if (!cart_edit_item($conn, $customerId, $cartItemId, $unitTypeId, $customerType, $quantity)) {
+                respond(['success' => false, 'message' => 'That cart item was not found.'], 404);
+            }
+            cart_response($conn, $customerId, 'Cart updated.');
+        //
 
         default:
             respond(['success' => false, 'message' => 'Unknown action.'], 400);
