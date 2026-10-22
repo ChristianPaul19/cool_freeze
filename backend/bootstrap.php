@@ -25,7 +25,4 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-# Helper
-
-
 require_once BACKEND_PATH . '/config/database.php';

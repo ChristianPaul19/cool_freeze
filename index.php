@@ -30,7 +30,7 @@ $pages = [
 ];
 
 //                        change this 'register'. pick the page in the $pages
-$page = $_GET['page'] ?? 'landing';
+$page = $_GET['page'] ?? 'landing';    
 
 if (
     !is_string($page) ||
