@@ -1,164 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password | CoolFreeze</title>
+    <link rel="stylesheet" href="<?= BASE_URL . 'frontend/assets/css/auth/forget.css' ?>">
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Forgot Password | CoolFreeze</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="<?= BASE_URL . 'frontend/assets/css/font-style.css' ?>">
-</head>
-
-<!-- h-dvh + overflow-hidden: the page is exactly one screen tall and never scrolls -->
-
-<body class="h-dvh overflow-hidden bg-white text-gray-900 antialiased">
-
-  <div class="flex h-full flex-col md:flex-row">
-
-    <!-- LEFT SIDE: form (only this panel scrolls, and only if a very short screen can't fit it) -->
-    <div class="h-full w-full overflow-y-auto px-5 py-6 sm:px-8 md:w-1/2 md:px-10 lg:px-16">
-      <div class="mx-auto flex min-h-full w-full max-w-md flex-col">
-
-        <!-- Top: brand (mobile only) + back button -->
-        <div>
-          <h2 class="mb-4 text-xl font-bold text-blue-600 md:hidden">COOLFREEZE</h2>
-          <a href="<?= BASE_URL ?>?page=login"
-            class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 hover:bg-blue-100"
-            aria-label="Back">
-            <img class="h-4 w-4" src="<?= BASE_URL . 'frontend/assets/img/back-arrow.svg' ?>" alt="">
-          </a>
-        </div>
-
-        <!-- Middle: main content, centered in the remaining space -->
-        <div class="my-auto py-6">
-          <h1 class="text-2xl font-bold sm:text-3xl">
-            Forgotten your password?
-          </h1>
-
-          <p class="mt-3 text-xs text-gray-500 sm:text-sm">
-            Enter your email address and we'll send you a link to reset your password.
-          </p>
-
-          <div id="form-message" class="hidden"></div>
-
-          <form id="forgot-form" class="mt-6 space-y-4" method="post"
-            action="<?= BASE_URL . 'backend/api/forgot-password.php' ?>" novalidate>
-            <div>
-              <label for="email" class="mb-1 block text-sm font-bold">Email Address</label>
-
-              <div class="relative">
-                <!-- Mail icon -->
-                <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                  <path d="m22 7-10 6L2 7"></path>
-                </svg>
-
-                <input type="email" id="email" name="email" autocomplete="email" required
-                  class="w-full rounded-md border border-blue-100 bg-blue-50 py-2.5 pl-10 pr-3 text-base outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter your email address">
+  <body>
+    <div class="page">
+      <!-- Left Side: Form -->
+      <div class="form-side">
+        <div class="form-column">
+          <div>
+            <h2 class="brand-mobile">COOLFREEZE</h2>
+          </div>
+          <div class="main-content">
+            <div class="top-row">
+              <a href="<?= BASE_URL ?>?page=login" class="back-link" aria-label="Back">
+                <img src="<?= BASE_URL . 'frontend/assets/img/back-arrow.svg' ?>" alt="Back">
+              </a>
+            </div>
+            <h1 class="title">
+              Forgotten your password?
+            </h1>
+            <p class="subtitle">
+              Enter your email address and we'll send you a link to reset your password.
+            </p>
+            <div id="form-message" class="hidden"></div>
+            <form id="forgot-form" method="post"
+              action="<?= BASE_URL . 'backend/api/forgot-password.php' ?>" novalidate>
+              <div>
+                <label for="email" class="label">Email Address</label>
+                <div class="input-wrap">
+                  <svg class="input-icon"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <path d="m22 7-10 6L2 7"></path>
+                  </svg>
+                  <input type="email" id="email" name="email" autocomplete="email" required
+                    class="input"
+                    placeholder="Enter your email address">
+                </div>
+                <p class="field-error hidden" data-for="email"></p>
               </div>
-              <p class="field-error mt-1 hidden text-xs text-red-600" data-for="email"></p>
-            </div>
-
-            <div class="flex items-center gap-2 text-sm">
-              <input class="h-4 w-4 shrink-0 rounded border-gray-300 accent-blue-600" type="checkbox" id="remember"
-                name="remember">
-              <label for="remember">Remember me</label>
-            </div>
-
-            <button type="submit"
-              class="w-full cursor-pointer rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              Send Code
-            </button>
-          </form>
-
-          <hr class="mt-4 w-2/3 border-gray-200">
+              <button type="submit" class="btn-send">
+                Send Code
+              </button>
+            </form>
+            <hr class="divider">
+            <p class="bottom-text">
+              Remembered it?
+              <a href="<?= BASE_URL ?>?page=login" class="link-underline">Back to Login</a>
+            </p>
+          </div>
         </div>
-
-        <!-- Bottom -->
-        <p class="text-xs text-gray-500 sm:text-sm">
-          Remembered it?
-          <a href="<?= BASE_URL ?>?page=login" class="text-blue-600 underline hover:text-blue-700">Back to Login</a>
-        </p>
-
       </div>
+
+
+      <!-- Right Side: Image-->
+      <div class="image-side">
+        <img src="<?= BASE_URL . 'frontend/assets/img/login_register_background.jpg' ?>" alt="">
+        <div class="image-content">
+          <h2 class="brand-desktop">COOLFREEZE</h2>
+          <h1 class="headline">
+            Stay Cool,<br>
+            Stay Comfortable
+          </h1>
+          <p class="tagline">
+            Quality air conditioning products and professional services
+            for your home and business.
+          </p>
+        </div>
+      </div>
+
     </div>
 
+    <script src="<?= BASE_URL ?>frontend/assets/js/api.js"></script>
+    <script>
+    (function() {
+      var form = document.getElementById('forgot-form');
+      var msg = document.getElementById('form-message');
+      var btn = form.querySelector('button[type="submit"]');
 
-    <!-- RIGHT SIDE: image (hidden on mobile, shown from md and up) -->
-    <div class="relative hidden h-full overflow-hidden md:block md:w-1/2">
-      <img src="<?= BASE_URL . 'frontend/assets/img/login_register_background.jpg' ?>"
-        class="absolute inset-0 h-full w-full object-cover -scale-x-100" alt="">
+      function show(text, ok) {
+        msg.className = (ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700');
+        msg.textContent = text;
+      }
 
-      <!-- Right-aligned text in the top part of the panel, above the aircon in the image -->
-      <div class="absolute right-0 top-0 flex max-w-full flex-col items-end p-6 text-right lg:p-10">
-        <h2 class="text-xl font-bold text-blue-600 lg:text-2xl">COOLFREEZE</h2>
-        <h1 class="mt-[3vh] text-[clamp(1.75rem,min(4vw,6vh),3rem)] font-bold leading-tight text-gray-900">
-          Stay Cool,<br>
-          Stay Comfortable
-        </h1>
-        <p class="mt-2 max-w-sm text-sm text-gray-600 lg:text-base">
-          Quality air conditioning products and professional services
-          for your home and business.
-        </p>
-      </div>
-    </div>
+      function clearErrors() {
+        msg.className = 'hidden';
+        document.querySelectorAll('.field-error').forEach(function(p) {
+          p.classList.add('hidden');
+          p.textContent = '';
+        });
+      }
 
-  </div>
-
-  <script src="<?= BASE_URL ?>frontend/assets/js/api.js"></script>
-  <script>
-  (function() {
-    var form = document.getElementById('forgot-form');
-    var msg = document.getElementById('form-message');
-    var btn = form.querySelector('button[type="submit"]');
-
-    function show(text, ok) {
-      msg.className = 'mt-4 rounded-md p-3 text-sm ' + (ok ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700');
-      msg.textContent = text;
-    }
-
-    function clearErrors() {
-      msg.className = 'hidden';
-      document.querySelectorAll('.field-error').forEach(function(p) {
-        p.classList.add('hidden');
-        p.textContent = '';
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        clearErrors();
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        cfPost(form.action, new FormData(form)).then(function(res) {
+          if (res.success) {
+            show(res.message, true);
+            setTimeout(function() {
+              window.location.replace(res.redirect);
+            }, 900);
+            return;
+          }
+          if (res.errors) {
+            Object.keys(res.errors).forEach(function(f) {
+              var p = document.querySelector('.field-error[data-for="' + f + '"]');
+              if (p) {
+                p.textContent = res.errors[f];
+                p.classList.remove('hidden');
+              }
+            });
+          } else {
+            show(res.message, false);
+          }
+          btn.disabled = false;
+          btn.textContent = 'Send Code';
+        });
       });
-    }
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      clearErrors();
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
-      cfPost(form.action, new FormData(form)).then(function(res) {
-        if (res.success) {
-          show(res.message, true);
-          setTimeout(function() {
-            window.location.replace(res.redirect);
-          }, 900);
-          return;
-        }
-        if (res.errors) {
-          Object.keys(res.errors).forEach(function(f) {
-            var p = document.querySelector('.field-error[data-for="' + f + '"]');
-            if (p) {
-              p.textContent = res.errors[f];
-              p.classList.remove('hidden');
-            }
-          });
-        } else {
-          show(res.message, false);
-        }
-        btn.disabled = false;
-        btn.textContent = 'Send Code';
-      });
-    });
-  })();
-  </script>
-
-</body>
+    })();
+    </script>
+  </body>
 
 </html>
