@@ -25,4 +25,4 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once BACKEND_PATH . '/config/database.php';
++require_once BACKEND_PATH . '/config/database.php';
