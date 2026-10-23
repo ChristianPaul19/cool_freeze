@@ -26,7 +26,7 @@
               Set a new <span class="title-accent">Password</span>
             </h1>
             <p class="subtitle">
-              Create a new password, ensure it differs from the previous ones for security.
+              Enter a new password with at least 8 characters, then confirm it below.
             </p>
             <div id="form-message" class="hidden"></div>
             <form id="reset-form" method="post" action="<?= BASE_URL . 'backend/api/reset-password.php' ?>" novalidate>

@@ -97,9 +97,9 @@
                 <input class="checkbox" type="checkbox" id="terms" name="terms" value="1" required>
                 <label for="terms">
                   I agree to the
-                  <a href="#" class="link-blue">Terms of Service</a>
+                  <a href="terms" class="link-blue">Terms of Service</a>
                   and
-                  <a href="#" class="link-blue">Privacy Policy</a>
+                  <a href="privacy" class="link-blue">Privacy Policy</a>
                 </label>
               </div>
               <p class="field-error hidden" data-for="terms"></p> <!-- NEW -->

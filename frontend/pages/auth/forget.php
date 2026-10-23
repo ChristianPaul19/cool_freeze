@@ -25,7 +25,7 @@
               Forgotten your password?
             </h1>
             <p class="subtitle">
-              Enter your email address and we'll send you a link to reset your password.
+               Enter your email address. If it is registered, we'll send you a 5-digit password reset code.
             </p>
             <div id="form-message" class="hidden"></div>
             <form id="forgot-form" method="post"

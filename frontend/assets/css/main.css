@@ -38,8 +38,8 @@
   --table-head-bg: #1e293f;
   --table-head-text: #ffffff;
 
-  --tips-grad-start: #7c4fe0;
-  --tips-grad-end: #9b5fea;
+  --tips-grad-start: #2f6fed;
+  --tips-grad-end: #1c3f8f;
   --tips-icon-bg: rgba(255, 255, 255, 0.2);
   --tips-text: rgba(255, 255, 255, 0.9);
 
@@ -2010,7 +2010,7 @@ select {
 .table-head {
   padding: 9px 11px;
 
-  background: var(--table-head-bg);
+  background: var(--blue);
 
   color: #ffffff !important;
 

@@ -24,7 +24,7 @@
               <span class="title-accent">Verification code!</span>
             </h1>
             <p class="subtitle">
-              We sent a reset link to your email, enter the 5 digit code that is mentioned in the email.
+              If your account is registered, a 5-digit code was sent to your email. Enter it below to continue resetting your password.
             </p>
             <div id="form-message" class="hidden"></div>
             <form method="post" id="verify-form" action="<?= BASE_URL . 'backend/api/verify-code.php' ?>" novalidate>

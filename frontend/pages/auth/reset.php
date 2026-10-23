@@ -24,10 +24,10 @@
               Password Reset
             </h1>
             <p class="subtitle">
-              Your password has been successfully reset, click the confirm to set a new password.
+              Your code has been verified. Continue to choose a new password.            
             </p>
             <a href="<?= BASE_URL ?>?page=set_password" class="btn-confirm">
-              Confirm
+              Set New Password
             </a>
             <hr class="divider">
             <p class="bottom-text">
