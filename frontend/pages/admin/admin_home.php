@@ -1,3 +1,12 @@
+<?php 
+require_once dirname(__DIR__, 3) . '/backend/bootstrap.php';
+
+$userName = $_SESSION['username'] ?? 'Admin';
+$currentPage = 'admin_home';
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
