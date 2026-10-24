@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../helpers/api.php';
 require_once __DIR__ . '/../models/password_reset.php';
+require_once __DIR__ . '/../models/user.php';
 
 require_method('POST');
 
@@ -35,18 +36,17 @@ if ($errors) {
 }
 
 try {
-    // The verified code must still be unused and unexpired
-    if (!password_reset_active($conn, $email, 'customer')) {
+    if (!password_reset_active($conn, $email)) {
         reset_expired();
     }
-    $customer = customer_find_by_login($conn, $email);
-    if (!$customer || (int) $customer['is_active'] !== 1) {
+    $user = user_find_by_email($conn, $email);
+    if (!$user || (int) $user['is_active'] !== 1) {
         reset_expired();
     }
 
     $conn->begin_transaction();
     try {
-        customer_set_password($conn, (int) $customer['customer_id'], $password);
+        user_set_password($conn, (int) $user['user_id'], $password);
         password_reset_mark_used($conn, $email);
         $conn->commit();
     } catch (Throwable $e) {

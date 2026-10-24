@@ -1,8 +1,9 @@
 <?php
-if (!empty($_SESSION['customer_id'])) {
-    header('Location: ' . BASE_URL . '?page=home_main');
+if ($role = auth_role()) {
+    header('Location: ' . auth_home_url($role));
     exit;
 }
+?>
 ?>
 
 <!DOCTYPE html>

@@ -7,59 +7,67 @@ USE coolfreeze_db;
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+CREATE TABLE IF NOT EXISTS users (
+  user_id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  role           ENUM('customer','admin','technician') NOT NULL,
+  username       VARCHAR(50)  NOT NULL,
+  email          VARCHAR(100) NOT NULL,
+  password_hash  VARCHAR(255) NOT NULL,
+  is_active      TINYINT(1)   NOT NULL DEFAULT 1,
+  last_login_at  DATETIME     NULL,
+  created_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id),
+  UNIQUE KEY uq_users_username (username),
+  UNIQUE KEY uq_users_email (email),
+  KEY idx_users_role (role)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS customers (
   customer_id      INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  username         VARCHAR(50)  NOT NULL,
-  email            VARCHAR(100) NOT NULL,
+  user_id          INT UNSIGNED NOT NULL,
   phone            VARCHAR(20)  NOT NULL,
-  password_hash    VARCHAR(255) NOT NULL,
   full_name        VARCHAR(100) NULL,
   birthday         DATE         NULL,
   address          VARCHAR(255) NULL,
   profile_image    VARCHAR(255) NULL,
   agreed_to_terms  TINYINT(1)   NOT NULL DEFAULT 0,
   terms_agreed_at  DATETIME     NULL,
-  is_active        TINYINT(1)   NOT NULL DEFAULT 1,
   created_at       DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at       DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (customer_id),
-  UNIQUE KEY uq_customers_username (username),
-  UNIQUE KEY uq_customers_email (email)
+  UNIQUE KEY uq_customers_user (user_id),
+  CONSTRAINT fk_customers_user FOREIGN KEY (user_id)
+    REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS admins (
-  admin_id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  username        VARCHAR(50)  NOT NULL,
-  email           VARCHAR(100) NOT NULL,
-  password_hash   VARCHAR(255) NOT NULL,
-  full_name       VARCHAR(100) NOT NULL,
-  phone           VARCHAR(20)  NULL,
-  role            ENUM('super_admin','admin','dispatcher') NOT NULL DEFAULT 'admin',
-  is_active       TINYINT(1)   NOT NULL DEFAULT 1,
-  last_login_at   DATETIME     NULL,
-  created_at      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  admin_id    INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id     INT UNSIGNED NOT NULL,
+  full_name   VARCHAR(100) NOT NULL,
+  phone       VARCHAR(20)  NULL,
+  created_at  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (admin_id),
-  UNIQUE KEY uq_admins_username (username),
-  UNIQUE KEY uq_admins_email (email)
+  UNIQUE KEY uq_admins_user (user_id),
+  CONSTRAINT fk_admins_user FOREIGN KEY (user_id)
+    REFERENCES users (user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS technicians (
-  technician_id   INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  username        VARCHAR(50)  NOT NULL,
-  email           VARCHAR(100) NOT NULL,
-  password_hash   VARCHAR(255) NOT NULL,
-  full_name       VARCHAR(100) NOT NULL,
-  phone           VARCHAR(20)  NOT NULL,
-  profile_image   VARCHAR(255) NULL,
-  availability    ENUM('available','on_job','off_duty') NOT NULL DEFAULT 'available',
-  is_active       TINYINT(1)   NOT NULL DEFAULT 1,
-  created_by      INT UNSIGNED NULL,
-  created_at      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  technician_id  INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id        INT UNSIGNED NOT NULL,
+  full_name      VARCHAR(100) NOT NULL,
+  phone          VARCHAR(20)  NOT NULL,
+  profile_image  VARCHAR(255) NULL,
+  availability   ENUM('available','on_job','off_duty') NOT NULL DEFAULT 'available',
+  created_by     INT UNSIGNED NULL,
+  created_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (technician_id),
-  UNIQUE KEY uq_technicians_username (username),
-  UNIQUE KEY uq_technicians_email (email),
+  UNIQUE KEY uq_technicians_user (user_id),
+  CONSTRAINT fk_technicians_user FOREIGN KEY (user_id)
+    REFERENCES users (user_id) ON DELETE CASCADE,
   CONSTRAINT fk_technicians_created_by FOREIGN KEY (created_by)
     REFERENCES admins (admin_id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
@@ -252,7 +260,6 @@ CREATE TABLE IF NOT EXISTS password_resets (
   KEY idx_reset_email (user_type, email)
 ) ENGINE=InnoDB;
 
--- Admin activity log (desktop app)
 CREATE TABLE IF NOT EXISTS activity_logs (
   log_id       INT UNSIGNED NOT NULL AUTO_INCREMENT,
   admin_id     INT UNSIGNED NULL,
