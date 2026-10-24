@@ -1,5 +1,6 @@
 <?php 
 require_once dirname(__DIR__, 3) . '/backend/bootstrap.php';
+require_once BACKEND_PATH . '/helpers/admin_guard.php';
 
 $userName = $_SESSION['username'] ?? 'Admin';
 $currentPage = 'admin_home';

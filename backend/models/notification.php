@@ -11,12 +11,15 @@ function notification_create(
     $stmt->close();
 }
 
-// One notification per active admin (e.g. "new request submitted")
-function notification_notify_admins(mysqli $conn, ?int $requestId, string $title, string $message): void {
+function notification_notify_admins(mysqli $conn, ?int $requestId, string $title, string $message
+): void {
     $stmt = $conn->prepare(
         "INSERT INTO notifications (recipient_type, recipient_id, request_id, title, message)
-         SELECT 'admin', admin_id, ?, ?, ? FROM admins WHERE is_active = 1"
+        SELECT 'admin', a.admin_id, ?, ?, ?
+        FROM admins a JOIN users u ON u.user_id = a.user_id
+        WHERE u.is_active = 1"
     );
+
     $stmt->bind_param('iss', $requestId, $title, $message);
     $stmt->execute();
     $stmt->close();

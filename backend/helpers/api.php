@@ -33,11 +33,11 @@ function get_str(string $key): string {
 
 // Requires a logged-in AND still-active customer. Deactivating an account also ends an open session.
 function require_customer(mysqli $conn): int {
-    $id = (int) ($_SESSION['customer_id'] ?? 0);
+    $id = auth_role() === 'customer' ? (int) $_SESSION['customer_id'] : 0;
     $active = false;
     try {
         if ($id > 0) {
-            $stmt = $conn->prepare('SELECT is_active FROM customers WHERE customer_id = ? LIMIT 1');
+           $stmt = $conn->prepare('SELECT u.is_active FROM customers c JOIN users u ON u.user_id = c.user_id WHERE c.customer_id = ? LIMIT 1');
             $stmt->bind_param('i', $id);
             $stmt->execute();
             $row = $stmt->get_result()->fetch_assoc();
@@ -56,6 +56,28 @@ function require_customer(mysqli $conn): int {
             'message'  => 'Please log in to continue.',
             'redirect' => BASE_URL . '?page=login',
         ], 401);
+    }
+    return $id;
+}
+
+function require_admin(mysqli $conn): int {
+    $id = auth_role() === 'admin' ? (int) $_SESSION['admin_id'] : 0;
+    $active = false;
+    try {
+        if ($id > 0) {
+            $stmt = $conn->prepare('SELECT u.is_active FROM admins a JOIN users u ON u.user_id = c.user_id WHERE a.admin_id = ? LIMIT 1');
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $row = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            $active = $row && (int) $row['is_active'] === 1;
+        }
+    } catch (mysqli_sql_exception $e) {
+        error_log($e->getMessage());
+        respond(['success' => false, 'message' => 'Something went wrong. Please try again.'], 500);
+    }
+    if (!$active) {
+        respond(['success' => false, 'message' => 'Admin login required.', 'redirect' => BASE_URL . '?page=login'], 401);
     }
     return $id;
 }

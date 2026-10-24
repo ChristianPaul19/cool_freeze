@@ -1,23 +1,21 @@
 <?php
 
-// Find by username OR email (usernames can't contain "@", so the two never collide).
-function customer_find_by_login(mysqli $conn, string $login): ?array {
-    $stmt = $conn->prepare(
-        'SELECT customer_id, username, email, password_hash, is_active
-         FROM customers WHERE email = ? OR username = ? LIMIT 1'
-    );
-    $stmt->bind_param('ss', $login, $login);
+require_once __DIR__ . '/user.php';
+
+function customer_user_id(mysqli $conn, int $customerId): ?int {
+    $stmt = $conn->prepare('SELECT user_id FROM customers WHERE customer_id = ? LIMIT 1');
+    $stmt->bind_param('i', $customerId);
     $stmt->execute();
-    $row = $stmt->get_result()->fetch_assoc();
+    $row = $stmt->get_result()->fetch_row();
     $stmt->close();
-    return $row ?: null;
+    return $row ? (int) $row[0] : null;
 }
 
 function customer_find(mysqli $conn, int $customerId): ?array {
     $stmt = $conn->prepare(
-        'SELECT customer_id, username, email, phone, full_name, birthday, address,
-                profile_image, is_active, created_at
-         FROM customers WHERE customer_id = ? LIMIT 1'
+        'SELECT c.customer_id, u.username, u.email, c.phone, c.full_name, c.birthday, c.address, c.profile_image, u.is_active, c.created_at
+         FROM customers c JOIN users u ON u.user_id = c.user_id
+         WHERE c.customer_id = ? LIMIT 1'
     );
     $stmt->bind_param('i', $customerId);
     $stmt->execute();
@@ -27,20 +25,7 @@ function customer_find(mysqli $conn, int $customerId): ?array {
 }
 
 function customer_taken_by_other(mysqli $conn, int $customerId, string $username, string $email): array {
-    $stmt = $conn->prepare(
-        'SELECT username, email FROM customers WHERE (username = ? OR email = ?) AND customer_id <> ?'
-    );
-    $stmt->bind_param('ssi', $username, $email, $customerId);
-    $stmt->execute();
-    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-
-    $taken = [];
-    foreach ($rows as $r) {
-        if (strcasecmp($r['username'], $username) === 0) $taken['username'] = 'Username is already taken.';
-        if (strcasecmp($r['email'], $email) === 0)       $taken['email']    = 'Email is already registered.';
-    }
-    return $taken;
+    return user_taken($conn, $username, $email, customer_user_id($conn, $customerId));
 }
 
 function customer_update_profile(
@@ -48,14 +33,15 @@ function customer_update_profile(
     ?string $fullName, ?string $phone, ?string $birthday, ?string $address
 ): void {
     $fullName = ($fullName === '') ? null : $fullName;
-    $phone    = ($phone === '')    ? null : $phone;   // phone is NOT NULL in the DB: empty keeps the old number
+    $phone    = ($phone === '')    ? null : $phone;   // phone is NOT NULL: empty keeps the old number
     $birthday = ($birthday === '') ? null : $birthday;
     $address  = ($address === '')  ? null : $address;
 
     $stmt = $conn->prepare(
-        'UPDATE customers
-         SET username = ?, email = ?, full_name = ?, phone = COALESCE(?, phone), birthday = ?, address = ?
-         WHERE customer_id = ?'
+        'UPDATE customers c JOIN users u ON u.user_id = c.user_id
+         SET u.username = ?, u.email = ?, c.full_name = ?, c.phone = COALESCE(?, c.phone),
+             c.birthday = ?, c.address = ?
+         WHERE c.customer_id = ?'
     );
     $stmt->bind_param('ssssssi', $username, $email, $fullName, $phone, $birthday, $address, $customerId);
     $stmt->execute();
@@ -69,9 +55,12 @@ function customer_update_profile_image(mysqli $conn, int $customerId, string $pa
     $stmt->close();
 }
 
-// Used by "change password" (verifies the current one first)
 function customer_change_password(mysqli $conn, int $customerId, string $current, string $new): bool {
-    $stmt = $conn->prepare('SELECT password_hash FROM customers WHERE customer_id = ? LIMIT 1');
+    $stmt = $conn->prepare(
+        'SELECT u.user_id, u.password_hash
+         FROM customers c JOIN users u ON u.user_id = c.user_id
+         WHERE c.customer_id = ? LIMIT 1'
+    );
     $stmt->bind_param('i', $customerId);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
@@ -80,46 +69,32 @@ function customer_change_password(mysqli $conn, int $customerId, string $current
     if (!$row || !password_verify($current, $row['password_hash'])) {
         return false;
     }
-    customer_set_password($conn, $customerId, $new);
+    user_set_password($conn, (int) $row['user_id'], $new);
     return true;
 }
 
-// Used by "forgot password" (no current password needed)
-function customer_set_password(mysqli $conn, int $customerId, string $new): void {
-    $hash = password_hash($new, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare('UPDATE customers SET password_hash = ? WHERE customer_id = ?');
-    $stmt->bind_param('si', $hash, $customerId);
-    $stmt->execute();
-    $stmt->close();
-}
-
-// register
 function customer_exists(mysqli $conn, string $username, string $email): array {
-    $stmt = $conn->prepare(
-        'SELECT username, email FROM customers WHERE username = ? OR email = ?'
-    );
-    $stmt->bind_param('ss', $username, $email);
-    $stmt->execute();
-    $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    $stmt->close();
-
-    $taken = [];
-    foreach ($rows as $r) {
-        if (strcasecmp($r['username'], $username) === 0) $taken['username'] = 'Username is already taken.';
-        if (strcasecmp($r['email'], $email) === 0)       $taken['email']    = 'Email is already registered.';
-    }
-    return $taken;
+    return user_taken($conn, $username, $email);   // checks every role, not just customers
 }
 
 function customer_create(mysqli $conn, string $username, string $email, string $phone, string $password): int {
-    $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare(
-        'INSERT INTO customers (username, email, phone, password_hash, agreed_to_terms, terms_agreed_at)
-         VALUES (?, ?, ?, ?, 1, NOW())'
-    );
-    $stmt->bind_param('ssss', $username, $email, $phone, $hash);
-    $stmt->execute();
-    $id = $stmt->insert_id;
-    $stmt->close();
-    return $id;
+    $conn->begin_transaction();
+    try {
+        $userId = user_create($conn, 'customer', $username, $email, $password);
+
+        $stmt = $conn->prepare(
+            'INSERT INTO customers (user_id, phone, agreed_to_terms, terms_agreed_at)
+             VALUES (?, ?, 1, NOW())'
+        );
+        $stmt->bind_param('is', $userId, $phone);
+        $stmt->execute();
+        $id = $stmt->insert_id;
+        $stmt->close();
+
+        $conn->commit();
+        return $id;
+    } catch (Throwable $e) {
+        $conn->rollback();
+        throw $e;
+    }
 }

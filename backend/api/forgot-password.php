@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../helpers/api.php';
 require_once __DIR__ . '/../helpers/mailer.php';
 require_once __DIR__ . '/../models/password_reset.php';
+require_once __DIR__ . '/../models/user.php';
 
 require_method('POST');
 
@@ -16,8 +17,8 @@ if (!empty($_SESSION['reset_last_sent']) && time() - $_SESSION['reset_last_sent'
 }
 
 try {
-    $customer = customer_find_by_login($conn, $email);
-    if ($customer && (int) $customer['is_active'] === 1) {
+    $user = user_find_by_email($conn, $email);
+    if ($user && (int) $user['is_active'] === 1) {
         send_reset_code_email($email, password_reset_create($conn, $email));
     }
 
