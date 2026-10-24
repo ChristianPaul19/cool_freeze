@@ -26,8 +26,6 @@ $pages = [
     'faq_main' => 'main/faq_main.php',
 
     'admin_home' => 'admin/admin_home.php',
-
-    'sample' => 'sample.php'
 ];
 
 $page = isset($_GET['page']) ? $_GET['page'] : 'landing';  
@@ -42,4 +40,7 @@ if (
     exit;
 }
 
+if (strpos($page, 'admin_') === 0) {
+    require_once BACKEND_PATH . '/helpers/admin_guard.php';
+}
 require FRONTEND_PATH . '/pages/' . $pages[$page];
